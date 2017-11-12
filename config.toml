@@ -34,8 +34,8 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
 [params]
   author = "Gabriel Morais"
   avatar = "/img/avatar.jpg"
-  seotitle = "Gabriel blog (SEO Version)"
-  subtitle = "Ready to be shot into space. ~ Fight Club"
+  seotitle = "Gabriel blog"
+  subtitle = "Ready to be shot into space."
   description = "Minhas análises e visualizações."
   paginate = 10
 
