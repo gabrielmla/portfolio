@@ -10,5 +10,3 @@ comments: false
 # Alguma coisa grande.
 
 Alguma coisa.
-
-~~~quero morrer~~
