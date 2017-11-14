@@ -1,6 +1,6 @@
 baseURL = "https://gabrielmla.github.io/portfolio/"
 languageCode = "pt-br"
-title = "my stage"
+title = "GABRIEL M."
 theme = "hugo-nuo"
 enableRobotsTXT = true
 pygmentsuseclasses = true
