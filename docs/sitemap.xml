@@ -3,22 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://gabrielmla.github.io/portfolio/about/</loc>
     <lastmod>2017-08-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://gabrielmla.github.io/portfolio/post/test-post/</loc>
+    <lastmod>2017-11-11T16:37:49-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://gabrielmla.github.io/portfolio/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://gabrielmla.github.io/portfolio/post/</loc>
+    <lastmod>2017-11-11T16:37:49-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://gabrielmla.github.io/portfolio/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gabrielmla.github.io/portfolio/</loc>
     <lastmod>2017-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

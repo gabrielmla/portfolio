@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313"
+baseURL = "https://gabrielmla.github.io/portfolio/"
 languageCode = "pt-br"
 title = "my stage"
 theme = "hugo-nuo"

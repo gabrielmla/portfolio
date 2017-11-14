@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>my stage</title>
-    <link>https://gabrielmla.github.io/portfolio/</link>
-    <description>Recent content on my stage</description>
+    <title>Posts on my stage</title>
+    <link>https://gabrielmla.github.io/portfolio/post/</link>
+    <description>Recent content in Posts on my stage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.</copyright>
-    <lastBuildDate>Wed, 02 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Nov 2017 16:37:49 -0300</lastBuildDate>
     
-	<atom:link href="https://gabrielmla.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gabrielmla.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>About</title>
-      <link>https://gabrielmla.github.io/portfolio/about/</link>
-      <pubDate>Wed, 02 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://gabrielmla.github.io/portfolio/about/</guid>
-      <description>Alguma coisa grande. Alguma coisa.</description>
-    </item>
     
     <item>
       <title>Test Post</title>

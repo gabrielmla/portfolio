@@ -1,7 +1,7 @@
 ---
 title: "Test Post"
 date: 2017-11-11T16:37:49-03:00
-draft: true
+draft: false
 ---
 
 <div id="vis" width=300></div>

@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  About | Gabriel blog
-</title>
+  <title>Test Post</title>
 
   
   
@@ -17,14 +15,16 @@
 
   
   <meta name="author" content="Gabriel Morais" />
-  <meta name="description" content="Minhas análises e visualizações." />
+  <meta name="description" content="const spec = { &#34;$schema&#34;: &#34;https://vega.github.io/schema/vega-lite/v2.json&#34;, &#34;data&#34;: { &#34;url&#34;: &#34;https://api.insa.gov.br/reservatorios/12172/monitoramento&#34;, &#34;format&#34;: { &#34;type&#34;: &#34;json&#34;, &#34;property&#34;: &#34;volumes&#34;, &#34;parse&#34;: { &#34;DataInformacao&#34;: &#34;utc:&#39;%d/%m/%Y&#39;&#34; } } }, &#34;width&#34;: 500, &#34;height&#34;: 120, &#34;mark&#34;: { &#34;type&#34;: &#34;area&#34;, &#34;interpolate&#34;: &#34;monotone&#34; }, &#34;selection&#34;: { &#34;brush&#34;: { &#34;type&#34;: &#34;interval&#34;, &#34;encodings&#34;: [&#34;x&#34;] } }, &#34;encoding&#34;: { &#34;x&#34;: { &#34;timeUnit&#34;: &#34;monthyear&#34;, &#34;field&#34;: &#34;DataInformacao&#34;, &#34;type&#34;: &#34;temporal&#34;, &#34;axis&#34;: { &#34;format&#34;: &#34;%Y&#34;, &#34;title&#34;: &#34;Volume percentual ao longo dos anos&#34; } }, &#34;" />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@gohugoio" />
-  <meta name="twitter:title" content="Gabriel blog" />
-  <meta name="twitter:description" content="Minhas análises e visualizações." />
-  <meta name="twitter:image" content="https://gabrielmla.github.io/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Test Post" />
+    <meta name="twitter:description" content="const spec = { &#34;$schema&#34;: &#34;https://vega.github.io/schema/vega-lite/v2.json&#34;, &#34;data&#34;: { &#34;url&#34;: &#34;https://api.insa.gov.br/reservatorios/12172/monitoramento&#34;, &#34;format&#34;: { &#34;type&#34;: &#34;json&#34;, &#34;property&#34;: &#34;volumes&#34;, &#34;parse&#34;: { &#34;DataInformacao&#34;: &#34;utc:&#39;%d/%m/%Y&#39;&#34; } } }, &#34;width&#34;: 500, &#34;height&#34;: 120, &#34;mark&#34;: { &#34;type&#34;: &#34;area&#34;, &#34;interpolate&#34;: &#34;monotone&#34; }, &#34;selection&#34;: { &#34;brush&#34;: { &#34;type&#34;: &#34;interval&#34;, &#34;encodings&#34;: [&#34;x&#34;] } }, &#34;encoding&#34;: { &#34;x&#34;: { &#34;timeUnit&#34;: &#34;monthyear&#34;, &#34;field&#34;: &#34;DataInformacao&#34;, &#34;type&#34;: &#34;temporal&#34;, &#34;axis&#34;: { &#34;format&#34;: &#34;%Y&#34;, &#34;title&#34;: &#34;Volume percentual ao longo dos anos&#34; } }, &#34;" />
+    <meta name="twitter:image" content="https://gabrielmla.github.io/img/avatar.jpg" />
+  
 
 
 
@@ -32,7 +32,7 @@
 <meta name="generator" content="Hugo 0.30.2" />
 
 
-<link rel="canonical" href="https://gabrielmla.github.io/portfolio/about/" />
+<link rel="canonical" href="https://gabrielmla.github.io/portfolio/post/test-post/" />
 <link rel="alternative" href="https://gabrielmla.github.io/portfolio/index.xml" title="my stage" type="application/atom+xml" />
 
 
@@ -96,6 +96,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -115,11 +119,11 @@
       
       
       
-        <li class="menu-item "><a href="https://gabrielmla.github.io/portfolio/">Home</a></li>
+        <li class="menu-item  is-active"><a href="https://gabrielmla.github.io/portfolio/">Home</a></li>
       
         <li class="menu-item "><a href="https://github.com/gabrielmla">Works</a></li>
       
-        <li class="menu-item  is-active"><a href="https://gabrielmla.github.io/portfolio/about/">About</a></li>
+        <li class="menu-item "><a href="https://gabrielmla.github.io/portfolio/about/">About</a></li>
       
     </ul>
   </nav>
@@ -185,14 +189,91 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">About</h1>
+      <h1 class="post-title">Test Post</h1>
+      <p class="post-meta">@Gabriel Morais · Nov 11, 2017 · 1 min read</p>
     </header>
-    <article class="post-content">
+    <article class="post-content"><div id="vis" width=300></div>
 
-<h1 id="alguma-coisa-grande">Alguma coisa grande.</h1>
-
-<p>Alguma coisa.</p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.7/vega.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.1/vega-lite.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-rc7/vega-embed.js"></script>
+<script>
+    const spec = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+        "data": {
+            "url": "https://api.insa.gov.br/reservatorios/12172/monitoramento",
+            "format": {
+                "type": "json",
+                "property": "volumes",
+                "parse": {
+                    "DataInformacao": "utc:'%d/%m/%Y'"
+                }
+            }
+        },
+        "width": 500,
+        "height": 120,
+        "mark": {
+            "type": "area",
+            "interpolate": "monotone"
+        },
+        "selection": {
+            "brush": {
+                "type": "interval",
+                "encodings": ["x"]
+            }
+        },
+        "encoding": {
+            "x": {
+                "timeUnit": "monthyear",
+                "field": "DataInformacao",
+                "type": "temporal",
+                "axis": {
+                    "format": "%Y",
+                    "title": "Volume percentual ao longo dos anos"
+                }
+            },
+            "y": {
+                "field": "VolumePercentual",
+                "type": "quantitative",
+                "axis": {
+                    "tickCount": 30,
+                    "grid": false,
+                    "title": "Volume percentual"
+                }
+            }
+        }
+    };
+    vegaEmbed('#vis', spec).catch(console.warn);
+</script>
 </article>
+    <footer class="post-footer">
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "gabrielmla" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     
   </section>
   <footer class="site-footer">
