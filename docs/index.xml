@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>my stage</title>
+    <title>GABRIEL M.</title>
     <link>https://gabrielmla.github.io/portfolio/</link>
-    <description>Recent content on my stage</description>
+    <description>Recent content on GABRIEL M.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.</copyright>
@@ -18,16 +18,19 @@
       <pubDate>Wed, 02 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>https://gabrielmla.github.io/portfolio/about/</guid>
-      <description>Alguma coisa grande. Alguma coisa.</description>
+      <description>Olá. Sou Gabriel Morais, no momento aluno do curso de Ciência da Computação da Universidade Federal de Campina Grande (UFCG).
+No momento este blog será o local onde postarei as visualizações feitas para a disciplina de Visualização da Informação, ministrada pelo professor Nazareno.</description>
     </item>
     
     <item>
-      <title>Test Post</title>
-      <link>https://gabrielmla.github.io/portfolio/post/test-post/</link>
-      <pubDate>Sat, 11 Nov 2017 16:37:49 -0300</pubDate>
+      <title>Três visualizações sobre Boqueirão</title>
+      <link>https://gabrielmla.github.io/portfolio/post/lab1-visudedados/</link>
+      <pubDate>Wed, 15 Nov 2017 16:37:49 -0300</pubDate>
       
-      <guid>https://gabrielmla.github.io/portfolio/post/test-post/</guid>
-      <description>const spec = { &#34;$schema&#34;: &#34;https://vega.github.io/schema/vega-lite/v2.json&#34;, &#34;data&#34;: { &#34;url&#34;: &#34;https://api.insa.gov.br/reservatorios/12172/monitoramento&#34;, &#34;format&#34;: { &#34;type&#34;: &#34;json&#34;, &#34;property&#34;: &#34;volumes&#34;, &#34;parse&#34;: { &#34;DataInformacao&#34;: &#34;utc:&#39;%d/%m/%Y&#39;&#34; } } }, &#34;width&#34;: 500, &#34;height&#34;: 120, &#34;mark&#34;: { &#34;type&#34;: &#34;area&#34;, &#34;interpolate&#34;: &#34;monotone&#34; }, &#34;selection&#34;: { &#34;brush&#34;: { &#34;type&#34;: &#34;interval&#34;, &#34;encodings&#34;: [&#34;x&#34;] } }, &#34;encoding&#34;: { &#34;x&#34;: { &#34;timeUnit&#34;: &#34;monthyear&#34;, &#34;field&#34;: &#34;DataInformacao&#34;, &#34;type&#34;: &#34;temporal&#34;, &#34;axis&#34;: { &#34;format&#34;: &#34;%Y&#34;, &#34;title&#34;: &#34;Volume percentual ao longo dos anos&#34; } }, &#34;</description>
+      <guid>https://gabrielmla.github.io/portfolio/post/lab1-visudedados/</guid>
+      <description>Vamos analisar o comportamento do açude de Boqueirão com o uso de 3 visualizações, usando os dados do monitoramento da INSA e com auxilia da ferramenta Vega-lite.
+Começarei analisando o volume máximo e mínimo dos anos no reservátorio de Boqueirão, pode ser uma forma interessante de descobrir como o volume do açude se comporta durante o ano.
+     const spec1 = { &#34;$schema&#34;: &#34;https://vega.github.io/schema/vega-lite/v2.json&#34;, &#34;description&#34;: &#34;Análise dos volumes máximos e mínimos do reservatório ao longo dos anos.</description>
     </item>
     
   </channel>
