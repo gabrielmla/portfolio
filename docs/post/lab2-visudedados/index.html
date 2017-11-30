@@ -261,7 +261,9 @@
                 .attr('cx', d => x(d.noventa_percentil))
                 .attr('r', d => 5)
                 .attr('cy', d => y(d.dez_percentil))
-                .attr('fill', d => mesChuvoso(d));
+                .attr('fill', d => mesChuvoso(d))
+                .append("svg:title")
+                .text(d => "Mês: " + d.mes);
 
             /*
              * Os eixos
