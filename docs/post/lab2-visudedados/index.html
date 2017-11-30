@@ -5,10 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Posts
-   | Gabriel blog
-</title>
+  <title>Analise sobre boqueirão utilizando d3</title>
 
   
   
@@ -18,14 +15,14 @@
 
   
   <meta name="author" content="Gabriel Morais" />
-  <meta name="description" content="" />
+  <meta name="description" content="Boqueirão Lab 2Dados de Boqueirão.mychart circle:hover {fill: rgb(194, 72, 123);}.mychart text {font: 12px sans-serif;text-anchor: left;color: black;}&#34;use strict&#34;function desenhaBarras(dados) {var alturaSVG = 400,larguraSVG = 650;var margin = {top: 10,right: 20,bottom: 30,left: 45},larguraVis = larguraSVG - margin.left - margin.right,alturaVis = alturaSVG - margin." />
 
   
   
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="Posts" />
-    <meta name="twitter:description" content="" />
+    <meta name="twitter:title" content="Analise sobre boqueirão utilizando d3" />
+    <meta name="twitter:description" content="Boqueirão Lab 2Dados de Boqueirão.mychart circle:hover {fill: rgb(194, 72, 123);}.mychart text {font: 12px sans-serif;text-anchor: left;color: black;}&#34;use strict&#34;function desenhaBarras(dados) {var alturaSVG = 400,larguraSVG = 650;var margin = {top: 10,right: 20,bottom: 30,left: 45},larguraVis = larguraSVG - margin.left - margin.right,alturaVis = alturaSVG - margin." />
     <meta name="twitter:image" content="https://gabrielmla.github.io/img/avatar.jpg" />
   
 
@@ -35,7 +32,7 @@
 <meta name="generator" content="Hugo 0.30.2" />
 
 
-<link rel="canonical" href="https://gabrielmla.github.io/portfolio/post/" />
+<link rel="canonical" href="https://gabrielmla.github.io/portfolio/post/lab2-visudedados/" />
 <link rel="alternative" href="https://gabrielmla.github.io/portfolio/index.xml" title="GABRIEL M." type="application/atom+xml" />
 
 
@@ -98,6 +95,10 @@
     
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
       
     </div>
     
@@ -186,42 +187,149 @@
   </nav>
 </header>
 
-  <section class="main post-list">
-    <header class="list-header offscreen">
-      <h2 class="list-label">Posts List</h2>
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Analise sobre boqueirão utilizando d3</h1>
+      <p class="post-meta">@Gabriel Morais · Nov 15, 2017 · 1 min read</p>
     </header>
-    
-    
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://gabrielmla.github.io/portfolio/post/lab1-visudedados/" class="post-link">Três visualizações sobre Boqueirão</a></h3>
-    <p class="post-meta">@Gabriel Morais · Nov 15, 2017 · 6 min read</p>
-  </header>
-  
-  <p class="post-summary">Vamos analisar o comportamento do açude de Boqueirão com o uso de 3 visualizações, usando os dados do monitoramento da INSA e com auxilia da ferramenta Vega-lite.
-Começarei analisando o volume máximo e mínimo dos anos no reservátorio de Boqueirão, pode ser uma forma interessante de descobrir como o volume do açude se comporta durante o ano.
-     const spec1 = { &#34;$schema&#34;: &#34;https://vega.github.io/schema/vega-lite/v2.json&#34;, &#34;description&#34;: &#34;Análise dos volumes máximos e mínimos do reservatório ao longo dos anos.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://gabrielmla.github.io/portfolio/post/lab1-visudedados/">Read More →</a>
-  </footer>
-</article>
+    <article class="post-content"><!DOCTYPE html>
+<html lang="pt-br">
 
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://gabrielmla.github.io/portfolio/post/lab2-visudedados/" class="post-link">Analise sobre boqueirão utilizando d3</a></h3>
-    <p class="post-meta">@Gabriel Morais · Nov 15, 2017 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">Boqueirão Lab 2Dados de Boqueirão.mychart circle:hover {fill: rgb(194, 72, 123);}.mychart text {font: 12px sans-serif;text-anchor: left;color: black;}&#34;use strict&#34;function desenhaBarras(dados) {var alturaSVG = 400,larguraSVG = 650;var margin = {top: 10,right: 20,bottom: 30,left: 45},larguraVis = larguraSVG - margin.left - margin.right,alturaVis = alturaSVG - margin.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://gabrielmla.github.io/portfolio/post/lab2-visudedados/">Read More →</a>
-  </footer>
-</article>
+<head>
+    <meta charset="utf-8">
+    <title>Boqueirão Lab 2</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
 
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>Dados de Boqueirão</h2>
+        </div>
+        <div class="row mychart" id="chart">
+        </div>
+    </div>
+
+    <style>
+        .mychart circle:hover {
+            fill: rgb(194, 72, 123);
+        }
+
+        .mychart text {
+            font: 12px sans-serif;
+            text-anchor: left;
+            color: black;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        "use strict"
+
+        function desenhaBarras(dados) {
+            var alturaSVG = 400,
+                larguraSVG = 650;
+            var margin = {
+                    top: 10,
+                    right: 20,
+                    bottom: 30,
+                    left: 45
+                },
+                larguraVis = larguraSVG - margin.left - margin.right,
+                alturaVis = alturaSVG - margin.top - margin.bottom;
+
+            var grafico = d3.select('#chart')
+                .append('svg')
+                .attr('width', larguraVis + margin.left + margin.right)
+                .attr('height', alturaVis + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+            var x = d3.scaleLinear()
+                .domain([Math.min(...dados.map((d, i)=> d.noventa_percentil))-1, Math.max(...dados.map((d, i)=> d.noventa_percentil))+1])
+                .rangeRound([0, larguraVis]);
+
+            var y = d3.scaleLinear()
+                .domain([Math.min(...dados.map((d, i)=> d.dez_percentil))-2, Math.max(...dados.map((d, i)=> d.dez_percentil))+2])
+                .rangeRound([alturaVis, 0]);
+
+            grafico.selectAll('g')
+                .data(dados)
+                .enter()
+                .append('circle')
+                .attr('cx', d => x(d.noventa_percentil))
+                .attr('r', d => 5)
+                .attr('cy', d => y(d.dez_percentil))
+                .attr('fill', d => mesChuvoso(d));
+
+            /*
+             * Os eixos
+             */
+            grafico.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + alturaVis + ")")
+                .call(d3.axisBottom(x));
+
+            grafico.append('g')
+                .attr('transform', 'translate(0,0)')
+                .call(d3.axisLeft(y))
+
+            grafico.append("text")
+                .attr("transform", "translate(" + (-30 + larguraVis / 2) + "," + (alturaVis + 30) + ")")
+                .text("Noventa-percentil");
+
+            grafico.append("text")
+                .attr("transform", "translate(-30," + (alturaVis + margin.top) / 2 + ") rotate(-90)")
+                .text("Dez-percentil");
+
+        }
+
+        function mesChuvoso(dados) {
+            if ((dados.mes > 5 && dados.mes < 9)) {
+                return "#75aeff";
+            } else {
+                return "#ffff60";
+            }
+        };
+
+    d3.csv('https://raw.githubusercontent.com/gabrielmla/intro-d3/master/dados/boqueirao-por-mes.csv', function(dados) {
+            desenhaBarras(dados);
+        });
+
+    </script>
+</body>
+
+</html>
+</article>
+    <footer class="post-footer">
       
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.
+      </p>
+    </footer>
     
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "gabrielmla" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     
   </section>
   <footer class="site-footer">
