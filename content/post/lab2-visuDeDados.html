@@ -1,0 +1,115 @@
+---
+title: "Analise sobre boqueirão utilizando d3"
+date: 2017-11-15T16:37:49-03:00
+draft: false
+---
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>Boqueirão Lab 2</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>Dados de Boqueirão</h2>
+        </div>
+        <div class="row mychart" id="chart">
+        </div>
+    </div>
+
+    <style>
+        .mychart circle:hover {
+            fill: rgb(194, 72, 123);
+        }
+
+        .mychart text {
+            font: 12px sans-serif;
+            text-anchor: left;
+            color: black;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        "use strict"
+
+        function desenhaBarras(dados) {
+            var alturaSVG = 400,
+                larguraSVG = 650;
+            var margin = {
+                    top: 10,
+                    right: 20,
+                    bottom: 30,
+                    left: 45
+                },
+                larguraVis = larguraSVG - margin.left - margin.right,
+                alturaVis = alturaSVG - margin.top - margin.bottom;
+
+            var grafico = d3.select('#chart')
+                .append('svg')
+                .attr('width', larguraVis + margin.left + margin.right)
+                .attr('height', alturaVis + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+            var x = d3.scaleLinear()
+                .domain([Math.min(...dados.map((d, i)=> d.noventa_percentil))-1, Math.max(...dados.map((d, i)=> d.noventa_percentil))+1])
+                .rangeRound([0, larguraVis]);
+
+            var y = d3.scaleLinear()
+                .domain([Math.min(...dados.map((d, i)=> d.dez_percentil))-2, Math.max(...dados.map((d, i)=> d.dez_percentil))+2])
+                .rangeRound([alturaVis, 0]);
+
+            grafico.selectAll('g')
+                .data(dados)
+                .enter()
+                .append('circle')
+                .attr('cx', d => x(d.noventa_percentil))
+                .attr('r', d => 5)
+                .attr('cy', d => y(d.dez_percentil))
+                .attr('fill', d => mesChuvoso(d));
+
+            /*
+             * Os eixos
+             */
+            grafico.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + alturaVis + ")")
+                .call(d3.axisBottom(x));
+
+            grafico.append('g')
+                .attr('transform', 'translate(0,0)')
+                .call(d3.axisLeft(y))
+
+            grafico.append("text")
+                .attr("transform", "translate(" + (-30 + larguraVis / 2) + "," + (alturaVis + 30) + ")")
+                .text("Noventa-percentil");
+
+            grafico.append("text")
+                .attr("transform", "translate(-30," + (alturaVis + margin.top) / 2 + ") rotate(-90)")
+                .text("Dez-percentil");
+
+        }
+
+        function mesChuvoso(dados) {
+            if ((dados.mes > 5 && dados.mes < 9)) {
+                return "#75aeff";
+            } else {
+                return "#ffff60";
+            }
+        };
+
+    d3.csv('https://raw.githubusercontent.com/gabrielmla/intro-d3/master/dados/boqueirao-por-mes.csv', function(dados) {
+            desenhaBarras(dados);
+        });
+
+    </script>
+</body>
+
+</html>
