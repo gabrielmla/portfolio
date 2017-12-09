@@ -1,3 +1,7 @@
+<div id='chart' style='width:100%'>
+  <svg style='height:500px' />
+</div><script src='stackedArea.js' type='text/javascript'> </script>
+
 <!DOCTYPE html>
 <meta charset="utf-8">
 <svg width="960" height="500"></svg>
@@ -26,9 +30,11 @@
             return x(d.data.horario_inicial);
         })
         .y0(function(d) {
+            console.log(y(d[0]));
             return y(d[0]);
         })
         .y1(function(d) {
+            console.log(y(d[1]));
             return y(d[1]);
         });
 
@@ -85,7 +91,6 @@
     
     function type(d, i, columns) {
         for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = d[columns[i]] / 100;
-        console.log(d);
         return d;
     }
 
