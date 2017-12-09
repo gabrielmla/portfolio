@@ -85,6 +85,11 @@ draft: true
                 .style("fill", function(d) {
                     return color(d.data.categoria);
                 });
+            
+            g.append("svg:title")
+                .text(function(d) {
+                    return d.data.total;
+                })
 
             var text = svg.select(".labels").selectAll("text")
                 .data(pie(data), key);
