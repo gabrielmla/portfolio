@@ -34,7 +34,7 @@ draft: true
             .domain(json_fields(dados_total_categoria))
             .range(["#8f0d0d", "#b52626", "#f57373", "#ffa3a3", "#d34747", "#5db43d", "#80d163", "#a9e592", "#306d84", "#4c849a", "#7cabbd"]);*/
 
-        var width = 960,
+        var width = 640,
             height = 500,
             radius = Math.min(width, height) / 2;
 
