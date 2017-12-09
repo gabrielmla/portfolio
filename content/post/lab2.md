@@ -5,5 +5,5 @@ draft: false
 ---
 
 <div id="vis1" width=640>
-    <script src="https://raw.githubusercontent.com/gabrielmla/portfolio/master/content/post/lab2-visuDeDadosP2-donut.js"></script>
+    <script src="https://cdn.rawgit.com/gabrielmla/portfolio/master/content/post/lab2-visuDeDadosP2-donut.js"></script>
 </div>

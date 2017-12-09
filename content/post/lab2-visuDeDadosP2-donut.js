@@ -1,9 +1,4 @@
----
-title: "Lab2 VisuDeDadosP2"
-date: 2017-12-08T19:49:31-03:00
-draft: true
----
-<!DOCTYPE html>
+document.write("<!DOCTYPE html>
 <meta charset="utf-8">
 <style>
     .arc text {
@@ -170,4 +165,4 @@ draft: true
         }
 
     </script>
-</body>
+</body>");
