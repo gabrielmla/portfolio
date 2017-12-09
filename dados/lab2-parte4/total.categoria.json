@@ -1,46 +1,46 @@
 [
   {
-    "categoria": "carros",
+    "categoria": "Carros",
     "total": 56265
   },
   {
-    "categoria": "motos",
+    "categoria": "Motos",
     "total": 25041
   },
   {
-    "categoria": "onibus",
+    "categoria": "Onibûs",
     "total": 596
   },
   {
-    "categoria": "caminhoes",
+    "categoria": "Caminhões",
     "total": 912
   },
   {
-    "categoria": "total_motorizados",
+    "categoria": "Motorizados",
     "total": 82814
   },
   {
-    "categoria": "mulheres_ciclistas",
+    "categoria": "Mulheres Ciclistas",
     "total": 209
   },
   {
-    "categoria": "homens_ciclistas",
+    "categoria": "Homens Ciclistas",
     "total": 2799
   },
   {
-    "categoria": "total_ciclistas",
+    "categoria": "Ciclistas",
     "total": 3008
   },
   {
-    "categoria": "mulheres_pedestres",
+    "categoria": "Mulheres Pedestres",
     "total": 5323
   },
   {
-    "categoria": "homens_pedestres",
+    "categoria": "Homens Pedestres",
     "total": 8748
   },
   {
-    "categoria": "total_pedestres",
+    "categoria": "Pedestres",
     "total": 14071
   }
 ]
