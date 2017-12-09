@@ -4,7 +4,7 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
     var path = 'https://raw.githubusercontent.com/gabrielmla/portfolio/master/dados/lab2-parte4/';
-    var dados = path + 'dados.sem.motorizado.csv';
+    var dados = path + 'dados.sem.motorizado.proporcional.csv';
     var svg = d3.select("svg"),
         margin = {
             top: 20,
@@ -18,32 +18,27 @@
     var x = d3.scaleTime().range([0, width]),
         y = d3.scaleLinear().range([height, 0]),
         z = d3.scaleOrdinal(d3.schemeCategory10);
-    
+
     var stack = d3.stack();
 
-    var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    d3.csv(dados, function(d, i, columns) {
-        for (i = 1, t = 0; i < columns.length; ++i) t += d[columns[i]] = +d[columns[i]];
-        d.total = t;
-        return d;
-    }, function(error, data) {
-        if (error) throw error;
-
-        var keys = data.columns.slice(1);
-        
-        var area = d3.area()
+    var area = d3.area()
         .x(function(d, i) {
             return x(d.data.horario_inicial);
         })
         .y0(function(d) {
-            console.log(d[0]);
             return y(d[0]);
         })
         .y1(function(d) {
             return y(d[1]);
         });
+
+    var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.csv(dados, type, function(error, data) {
+        if (error) throw error;
+
+        var keys = data.columns.slice(1);
 
         x.domain(d3.extent(data, function(d) {
             return d.horario_inicial;
@@ -87,5 +82,11 @@
             .attr("class", "axis axis--y")
             .call(d3.axisLeft(y).ticks(10, "%"));
     });
+    
+    function type(d, i, columns) {
+        for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = d[columns[i]] / 100;
+        console.log(d);
+        return d;
+    }
 
 </script>
