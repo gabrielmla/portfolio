@@ -4,56 +4,64 @@
         display: none;
     }
 </style>
-<svg width="960" height="500"></svg>
+<body>
+
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
     var path = 'https://raw.githubusercontent.com/gabrielmla/portfolio/master/dados/lab2-parte4/';
-    var dados = path + 'dados.horario.csv';
-    var svg = d3.select("svg"),
-        margin = {
+    var dados_bar = path + 'dados.horario.csv';
+    
+    var width = 800,
+        height = 400;
+    
+    var svg_bar = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+    
+    var margin = {
             top: 20,
             right: 20,
             bottom: 30,
             left: 40
         },
-        width = +svg.attr("width") - margin.left - margin.right,
-        height = +svg.attr("height") - margin.top - margin.bottom,
-        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        width = +svg_bar.attr("width") - margin.left - margin.right,
+        height = +svg_bar.attr("height") - margin.top - margin.bottom;
 
-    var x = d3.scaleBand()
+    var x_bar = d3.scaleBand()
         .rangeRound([0, width])
         .paddingInner(0.05)
         .align(0.1);
 
-    var y = d3.scaleLinear()
+    var y_bar = d3.scaleLinear()
         .rangeRound([height, 0]);
 
-    var z = d3.scaleOrdinal()
+    var z_bar = d3.scaleOrdinal()
         .range(["#8f0d0d", "#b52626", "#f57373", "#ffa3a3", "#5db43d", "#80d163", "#306d84", "#4c849a"]);
 
-    d3.csv(dados, function(d, i, columns) {
+    d3.csv(dados_bar, function(d, i, columns) {
         for (i = 1, t = 0; i < columns.length; ++i) t += d[columns[i]] = +d[columns[i]];
         d.total = t;
         return d;
     }, function(error, data) {
         if (error) throw error;
+        var g = svg_bar.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         var keys = data.columns.slice(1);
 
-        x.domain(data.map(function(d) {
+        x_bar.domain(data.map(function(d) {
             return d.horario_inicial;
         }));
-        y.domain([0, d3.max(data, function(d) {
+        y_bar.domain([0, d3.max(data, function(d) {
             return d.total;
         })]).nice();
-        z.domain(keys);
+        z_bar.domain(keys);
 
         g.append("g")
             .selectAll("g")
             .data(d3.stack().keys(keys)(data))
             .enter().append("g")
             .attr("fill", function(d) {
-                return z(d.key);
+                return z_bar(d.key);
             })
             .selectAll("rect")
             .data(function(d) {
@@ -61,20 +69,20 @@
             })
             .enter().append("rect")
             .attr("x", function(d) {
-                return x(d.data.horario_inicial);
+                return x_bar(d.data.horario_inicial);
             })
             .attr("y", function(d) {
-                return y(d[1]);
+                return y_bar(d[1]);
             })
             .attr("height", function(d) {
-                return y(d[0]) - y(d[1]);
+                return y_bar(d[0]) - y_bar(d[1]);
             })
-            .attr("width", x.bandwidth());
+            .attr("width", x_bar.bandwidth());
 
         g.append("g")
             .attr("class", "axis")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x))
+            .call(d3.axisBottom(x_bar))
                 .selectAll("text")  
                 .style("text-anchor", "end")
                 .attr("dx", "-.8em")
@@ -83,10 +91,10 @@
 
         g.append("g")
             .attr("class", "axis")
-            .call(d3.axisLeft(y).ticks(null, "s"))
+            .call(d3.axisLeft(y_bar).ticks(null, "s"))
             .append("text")
             .attr("x", 2)
-            .attr("y", y(y.ticks().pop()) + 0.5)
+            .attr("y", y_bar(y_bar.ticks().pop()) + 0.5)
             .attr("dy", "0.32em")
             .attr("fill", "#000")
             .attr("font-weight", "bold")
@@ -108,7 +116,7 @@
             .attr("x", width - 19)
             .attr("width", 19)
             .attr("height", 19)
-            .attr("fill", z);
+            .attr("fill", z_bar);
 
         legend.append("text")
             .attr("x", width - 24)
@@ -119,3 +127,4 @@
             });
     });
 </script>
+</body>

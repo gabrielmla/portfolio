@@ -46,15 +46,15 @@
                 return d.total;
             });
 
-        var svg = d3.select("body").append("svg")
+        var svg_donut = d3.select("body").append("svg")
             .attr("width", width)
             .attr("height", height)
             .append("g")
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-        svg.append("g")
+        svg_donut.append("g")
             .attr("class", "labels");
-        svg.append("g")
+        svg_donut.append("g")
             .attr("class", "lines");
 
         d3.csv(dados_total_categoria, type, function(error, data) {
@@ -64,7 +64,7 @@
                 return d.data.categoria;
             };
 
-            var g = svg.selectAll(".arc")
+            var g = svg_donut.selectAll(".arc")
                 .data(pie(data))
                 .enter().append("g")
                 .attr("class", "arc");
@@ -74,13 +74,13 @@
                 .style("fill", function(d) {
                     return color(d.data.categoria);
                 });
-            
+
             g.append("svg:title")
                 .text(function(d) {
                     return d.data.total;
                 })
 
-            var text = svg.select(".labels").selectAll("text")
+            var text = svg_donut.select(".labels").selectAll("text")
                 .data(pie(data), key);
 
             text.enter()
@@ -121,7 +121,7 @@
 
             /* ------- SLICE TO TEXT POLYLINES -------*/
 
-            var polyline = svg.select(".lines").selectAll("polyline")
+            var polyline = svg_donut.select(".lines").selectAll("polyline")
                 .data(pie(data), key);
 
             polyline.enter()

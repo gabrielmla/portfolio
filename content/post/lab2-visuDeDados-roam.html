@@ -1,0 +1,448 @@
+---
+title: "Lab2 VisuDeDados Roam"
+date: 2017-12-10T13:51:32-03:00
+draft: true
+---
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<style>
+    #donut-div .arc text {
+        font: 10px sans-serif;
+        text-anchor: middle;
+    }
+
+    #donut-div .arc path {
+        stroke: #fff;
+    }
+
+    #donut-div polyline {
+        opacity: .3;
+        stroke: black;
+        stroke-width: 2px;
+        fill: none;
+    }
+</style>
+
+<style>
+    #bar-div .axis .domain {
+        display: none;
+    }
+</style>
+
+<style>
+    #line-div .axis--x path {
+        display: none;
+    }
+
+    #line-div .line {
+        fill: none;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+    }
+</style>
+
+<body>
+    <p> Vamos analisar essa bagaça aqui:</p>
+    <div class="donut-div" id="donut-div" width=800 height=450>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+    </div>
+    <script>
+        var path = 'https://raw.githubusercontent.com/gabrielmla/portfolio/master/dados/lab2-parte4/';
+        var dados_total_categoria = path + 'total.categoria.csv';
+
+        var width = 640,
+            height = 400,
+            radius = Math.min(width, height) / 2;
+
+        var color = d3.scale.ordinal()
+            .range(["#d34747", "#a9e592", "#7cabbd"]);
+
+        var arc = d3.svg.arc()
+            .outerRadius(radius * 0.8)
+            .innerRadius(radius * 0.4);
+
+        var outerArc = d3.svg.arc()
+            .innerRadius(radius * 0.9)
+            .outerRadius(radius * 0.9);
+
+        var pie = d3.layout.pie()
+            .sort(null)
+            .value(function(d) {
+                return d.total;
+            });
+
+        var svg_donut = d3.select("#donut-div").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        svg_donut.append("g")
+            .attr("class", "labels");
+        svg_donut.append("g")
+            .attr("class", "lines");
+
+        d3.csv(dados_total_categoria, type_donut, function(error, data) {
+            if (error) throw error;
+
+            var key = function(d) {
+                return d.data.categoria;
+            };
+
+            var g = svg_donut.selectAll(".arc")
+                .data(pie(data))
+                .enter().append("g")
+                .attr("class", "arc");
+
+            g.append("path")
+                .attr("d", arc)
+                .style("fill", function(d) {
+                    return color(d.data.categoria);
+                });
+
+            g.append("svg:title")
+                .text(function(d) {
+                    return d.data.total;
+                })
+
+            var text = svg_donut.select(".labels").selectAll("text")
+                .data(pie(data), key);
+
+            text.enter()
+                .append("text")
+                .attr("dy", ".35em")
+                .text(function(d) {
+                    return d.data.categoria;
+                });
+
+            function midAngle(d) {
+                return d.startAngle + (d.endAngle - d.startAngle) / 2;
+            }
+
+            text.transition().duration(1000)
+                .attrTween("transform", function(d) {
+                    this._current = this._current || d;
+                    var interpolate = d3.interpolate(this._current, d);
+                    this._current = interpolate(0);
+                    return function(t) {
+                        var d2 = interpolate(t);
+                        var pos = outerArc.centroid(d2);
+                        pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+                        return "translate(" + pos + ")";
+                    };
+                })
+                .styleTween("text-anchor", function(d) {
+                    this._current = this._current || d;
+                    var interpolate = d3.interpolate(this._current, d);
+                    this._current = interpolate(0);
+                    return function(t) {
+                        var d2 = interpolate(t);
+                        return midAngle(d2) < Math.PI ? "start" : "end";
+                    };
+                });
+
+            text.exit()
+                .remove();
+
+            /* ------- SLICE TO TEXT POLYLINES -------*/
+
+            var polyline = svg_donut.select(".lines").selectAll("polyline")
+                .data(pie(data), key);
+
+            polyline.enter()
+                .append("polyline");
+
+            polyline.transition().duration(1000)
+                .attrTween("points", function(d) {
+                    this._current = this._current || d;
+                    var interpolate = d3.interpolate(this._current, d);
+                    this._current = interpolate(0);
+                    return function(t) {
+                        var d2 = interpolate(t);
+                        var pos = outerArc.centroid(d2);
+                        pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+                        return [arc.centroid(d2), outerArc.centroid(d2), pos];
+                    };
+                });
+
+            polyline.exit()
+                .remove();
+
+        });
+
+        function type_donut(d) {
+            d.total = +d.total;
+            return d;
+        }
+
+        function json_fields(json) {
+            var fields = [];
+            for (field in json) {
+                if (json.hasOwnProperty(field)) {
+                    fields.push(field);
+                }
+            };
+            return fields;
+        }
+    </script>
+
+    <p>Agora essa coisa aqui:</p>
+    <div class="bar-div" id="bar-div" width=800 height=450>
+        <script src="http://d3js.org/d3.v4.min.js"></script>
+    </div>
+    <script>
+        var path = 'https://raw.githubusercontent.com/gabrielmla/portfolio/master/dados/lab2-parte4/';
+        var dados_bar = path + 'dados.horario.csv';
+
+        var width = 800,
+            height = 400;
+
+        var svg_bar = d3.select("#bar-div").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+
+        var margin = {
+                top: 20,
+                right: 20,
+                bottom: 30,
+                left: 40
+            },
+            width = +svg_bar.attr("width") - margin.left - margin.right,
+            height = +svg_bar.attr("height") - margin.top - margin.bottom;
+
+        var x_bar = d3.scaleBand()
+            .rangeRound([0, width])
+            .paddingInner(0.05)
+            .align(0.1);
+
+        var y_bar = d3.scaleLinear()
+            .rangeRound([height, 0]);
+
+        var z_bar = d3.scaleOrdinal()
+            .range(["#8f0d0d", "#b52626", "#f57373", "#ffa3a3", "#5db43d", "#80d163", "#306d84", "#4c849a"]);
+
+        d3.csv(dados_bar, function(d, i, columns) {
+            for (i = 1, t = 0; i < columns.length; ++i) t += d[columns[i]] = +d[columns[i]];
+            d.total = t;
+            return d;
+        }, function(error, data) {
+            if (error) throw error;
+            var g = svg_bar.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            var keys = data.columns.slice(1);
+
+            x_bar.domain(data.map(function(d) {
+                return d.horario_inicial;
+            }));
+            y_bar.domain([0, d3.max(data, function(d) {
+                return d.total;
+            })]).nice();
+            z_bar.domain(keys);
+
+            g.append("g")
+                .selectAll("g")
+                .data(d3.stack().keys(keys)(data))
+                .enter().append("g")
+                .attr("fill", function(d) {
+                    return z_bar(d.key);
+                })
+                .selectAll("rect")
+                .data(function(d) {
+                    return d;
+                })
+                .enter().append("rect")
+                .attr("x", function(d) {
+                    return x_bar(d.data.horario_inicial);
+                })
+                .attr("y", function(d) {
+                    return y_bar(d[1]);
+                })
+                .attr("height", function(d) {
+                    return y_bar(d[0]) - y_bar(d[1]);
+                })
+                .attr("width", x_bar.bandwidth());
+
+            g.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x_bar))
+                .selectAll("text")
+                .style("text-anchor", "end")
+                .attr("dx", "-.8em")
+                .attr("dy", ".15em")
+                .attr("transform", "rotate(-45)");
+
+            g.append("g")
+                .attr("class", "axis")
+                .call(d3.axisLeft(y_bar).ticks(null, "s"))
+                .append("text")
+                .attr("x", 2)
+                .attr("y", y_bar(y_bar.ticks().pop()) + 0.5)
+                .attr("dy", "0.32em")
+                .attr("fill", "#000")
+                .attr("font-weight", "bold")
+                .attr("text-anchor", "start")
+                .text("Elementos");
+
+            var legend = g.append("g")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", 10)
+                .attr("text-anchor", "end")
+                .selectAll("g")
+                .data(keys.slice().reverse())
+                .enter().append("g")
+                .attr("transform", function(d, i) {
+                    return "translate(0," + i * 20 + ")";
+                });
+
+            legend.append("rect")
+                .attr("x", width - 19)
+                .attr("width", 19)
+                .attr("height", 19)
+                .attr("fill", z_bar);
+
+            legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 9.5)
+                .attr("dy", "0.32em")
+                .text(function(d) {
+                    return d;
+                });
+        });
+    </script>
+    <div class="line-div" id="line-div" width=800 height=450>
+        <script src="http://d3js.org/d3.v4.min.js"></script>
+    </div>
+    <script>
+        var path = 'https://raw.githubusercontent.com/gabrielmla/portfolio/master/dados/lab2-parte4/';
+        var dados = path + 'dados.sem.motorizado.csv';
+
+        var width = 800,
+            height = 400;
+
+        var svg_line = d3.select(".line-div").append("svg")
+            .attr("width", width)
+            .attr("height", height),
+            margin = {
+                top: 20,
+                right: 80,
+                bottom: 30,
+                left: 50
+            },
+            width = svg_line.attr("width") - margin.left - margin.right,
+            height = svg_line.attr("height") - margin.top - margin.bottom;
+
+        var parseTime = d3.timeParse("%H:%M");
+
+        var x_line = d3.scaleTime().range([0, width]),
+            y_line = d3.scaleLinear().range([height, 0]),
+            z_line = d3.scaleOrdinal().range(["#5db43d", "#a9e592", "#306d84", "#7cabbd"]);
+
+        var line = d3.line()
+            .curve(d3.curveBasis)
+            .x(function(d) {
+                return x_line(d.hora);
+            })
+            .y(function(d) {
+                return y_line(d.quantidade);
+            });
+
+        d3.csv(dados, type_line, function(error, data) {
+            if (error) throw error;
+            g = svg_line.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            var categorias = data.columns.slice(1).map(function(id) {
+                return {
+                    id: id,
+                    values: data.map(function(d) {
+                        return {
+                            hora: d.horario_inicial,
+                            quantidade: d[id]
+                        };
+                    })
+                };
+            });
+
+            x_line.domain(d3.extent(data, function(d) {
+                return d.horario_inicial;
+            }));
+
+            y_line.domain([
+                d3.min(categorias, function(c) {
+                    return d3.min(c.values, function(d) {
+                        return d.quantidade;
+                    });
+                }),
+                d3.max(categorias, function(c) {
+                    return d3.max(c.values, function(d) {
+                        return d.quantidade;
+                    });
+                })
+            ]);
+
+            z_line.domain(categorias.map(function(c) {
+                return c.id;
+            }));
+
+            g.append("g")
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x_line));
+
+            g.append("g")
+                .attr("class", "axis axis--y")
+                .call(d3.axisLeft(y_line))
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", "0.71em")
+                .attr("fill", "#000")
+                .text("Quantidade");
+
+            var categoria = g.selectAll(".categoria")
+                .data(categorias)
+                .enter().append("g")
+                .attr("class", "categoria");
+
+            categoria.append("path")
+                .attr("class", "line")
+                .attr("d", function(d) {
+                    return line(d.values);
+                })
+                .style("stroke", function(d) {
+                    return z_line(d.id);
+                });
+
+            categoria.append("text")
+                .datum(function(d) {
+                    return {
+                        id: d.id,
+                        value: d.values[d.values.length - 1]
+                    };
+                })
+                .attr("transform", function(d) {
+                    return "translate(" + x_line(d.value.hora) + "," + y_line(d.value.quantidade) + ")";
+                })
+                .attr("x", 3)
+                .attr("dy", "0.35em")
+                .style("font", "10px sans-serif")
+                .text(function(d) {
+                    return d.id;
+                });
+        });
+
+        function type_line(d, _, columns) {
+            d.horario_inicial = parseTime(d.horario_inicial);
+            for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
+            return d;
+        }
+    </script>
+</body>
+
+
+</html>
