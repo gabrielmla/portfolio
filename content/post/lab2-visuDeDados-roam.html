@@ -8,7 +8,6 @@ draft: true
 
 <head>
     <meta charset="utf-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <style>
     #donut-div .arc text {
@@ -51,16 +50,18 @@ draft: true
     
     <p>Resolvi então fazer uma análise sobre como as pessoas se locomovem quando passam pelo Açude Velho. Primeiramente vejamos o total coletado sobre os meios de locomoção presente nos dados disponibilizados:</p>
     
-    <div class="donut-div" id="donut-div" width=800 height=450>
+    <div class="donut-div" id="donut-div" width=900 height=450 align="center">
         <script src="http://d3js.org/d3.v3.min.js"></script>
     </div>
     <script>
         var path = 'https://raw.githubusercontent.com/gabrielmla/portfolio/master/dados/lab2-parte4/';
         var dados_total_categoria = path + 'total.categoria.csv';
 
-        var width = 640,
-            height = 400,
+        var width = 900,
+            height = 450,
             radius = Math.min(width, height) / 2;
+        
+        var pie_total = 99893;
 
         var color = d3.scale.ordinal()
             .range(["#d34747", "#a9e592", "#7cabbd"]);
@@ -110,7 +111,7 @@ draft: true
 
             g.append("svg:title")
                 .text(function(d) {
-                    return d.data.total;
+                    return d.data.total + ", " + Math.round((d.data.total / pie_total) * 100) + "%";
                 })
 
             var text = svg_donut.select(".labels").selectAll("text")
@@ -194,16 +195,17 @@ draft: true
         }
     </script>
 
-    <p>Agora essa coisa aqui:</p>
-    <div class="bar-div" id="bar-div" width=800 height=450>
+    <p>Temos como forma de locomoção mais utilizada a motorizada, estão incluidos nessa categoria: Ônibus, Caminhões, Carros e Motos. Essa categoria representa 83% dos dados. Ela é seguida por pedestres que são 14% do total e por ciclistas que são apenas 3% dos dados. Apesar de ser revelado que os veículos motorizados são os maios utilizados, ainda não temos muitas informações de como as subcategorias presentes nas categorias mostradas nesse gráfico se comportam. Além disso os horários de quando foram feitas as coletas estão presentes nos dados. Então iremos agora analisar os dados dessas subcategorias, por exemplo motos, e como elas se comportam durante o dia!</p>
+
+    <div class="bar-div" id="bar-div" width=900 height=450 >
         <script src="http://d3js.org/d3.v4.min.js"></script>
     </div>
     <script>
         var path = 'https://raw.githubusercontent.com/gabrielmla/portfolio/master/dados/lab2-parte4/';
         var dados_bar = path + 'dados.horario.csv';
 
-        var width = 800,
-            height = 400;
+        var width = 900,
+            height = 450;
 
         var svg_bar = d3.select("#bar-div").append("svg")
             .attr("width", width)
@@ -304,13 +306,13 @@ draft: true
                 });
 
             legend.append("rect")
-                .attr("x", width - 19)
+                .attr("x", 840 - 19)
                 .attr("width", 19)
                 .attr("height", 19)
                 .attr("fill", z_bar);
 
             legend.append("text")
-                .attr("x", width - 24)
+                .attr("x", 840 - 24)
                 .attr("y", 9.5)
                 .attr("dy", "0.32em")
                 .text(function(d) {
@@ -318,16 +320,19 @@ draft: true
                 });
         });
     </script>
+    
+    <p>Em tons de vermelho temos os itens motorizados, em tons de verde temos os ciclistas e em tons de azul temos os pedestres. Os dados de ciclistas e pedestres estão dividos em homens e mulheres. O açude começa pouco movimentado as 6<i>am</i>, mas isso logo muda na proxima coleta de dados. É facilmente notado que os veículos motorizados são maioria em todos os horários de coleta, exceto as 6<i>am</i>. Além disso, percebemos que entre 9<i>am</i> e 15<i>pm</i> os ciclistas e pedestres são poucos. Já depois das 15<i>pm</i> e 20<i>pm</i> temos um acrescimo no movimento de pessoas no local, em todas as categorias. Como os veículos motorizados são grande parte dos dados, iremos agora analisar apenas os ciclistas e pedestres.</p>
+    
     <p>Agora as linhas:</p>
-    <div class="line-div" id="line-div" width=800 height=450>
+    <div class="line-div" id="line-div" width=900 height=450>
         <script src="http://d3js.org/d3.v4.min.js"></script>
     </div>
     <script>
         var path = 'https://raw.githubusercontent.com/gabrielmla/portfolio/master/dados/lab2-parte4/';
         var dados = path + 'dados.sem.motorizado.csv';
 
-        var width = 800,
-            height = 400;
+        var width = 900,
+            height = 450;
 
         var svg_line = d3.select(".line-div").append("svg")
             .attr("width", width)
@@ -446,6 +451,9 @@ draft: true
             return d;
         }
     </script>
+    
+    <p>Aqui temos os homens como tons claros e mulheres como tons escuros, seguindo as cores de azul e verde como nas visualizações passadas. No geral, os homens estão mais presentes como pedestres e ciclistas no Açude Velho. Podemos ver que as mulheres ciclistas são muito poucas, chegando a zero em alguns horários.</p>
+    
 </body>
 
 
