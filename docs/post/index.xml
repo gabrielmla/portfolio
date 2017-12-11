@@ -1,36 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on GABRIEL M.</title>
-    <link>https://gabrielmla.github.io/portfolio/post/</link>
-    <description>Recent content in Posts on GABRIEL M.</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>pt-br</language>
-    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.</copyright>
-    <lastBuildDate>Wed, 15 Nov 2017 16:37:49 -0300</lastBuildDate>
-    
-	<atom:link href="https://gabrielmla.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Analise sobre boqueirão utilizando d3</title>
-      <link>https://gabrielmla.github.io/portfolio/post/lab2-visudedados/</link>
-      <pubDate>Wed, 15 Nov 2017 16:37:49 -0300</pubDate>
-      
-      <guid>https://gabrielmla.github.io/portfolio/post/lab2-visudedados/</guid>
-      <description>Boqueirão Lab 2Dados de Boqueirão.mychart circle:hover {fill: rgb(194, 72, 123);}.mychart text {font: 12px sans-serif;text-anchor: left;color: black;}&#34;use strict&#34;function desenhaBarras(dados) {var alturaSVG = 400,larguraSVG = 650;var margin = {top: 10,right: 20,bottom: 30,left: 45},larguraVis = larguraSVG - margin.left - margin.right,alturaVis = alturaSVG - margin.</description>
-    </item>
-    
-    <item>
-      <title>Três visualizações sobre Boqueirão</title>
-      <link>https://gabrielmla.github.io/portfolio/post/lab1-visudedados/</link>
-      <pubDate>Wed, 15 Nov 2017 16:37:49 -0300</pubDate>
-      
-      <guid>https://gabrielmla.github.io/portfolio/post/lab1-visudedados/</guid>
-      <description>Vamos analisar o comportamento do açude de Boqueirão com o uso de 3 visualizações, usando os dados do monitoramento da INSA e com auxilia da ferramenta Vega-lite.
-Começarei analisando o volume máximo e mínimo dos anos no reservátorio de Boqueirão, pode ser uma forma interessante de descobrir como o volume do açude se comporta durante o ano.
-     const spec1 = { &#34;$schema&#34;: &#34;https://vega.github.io/schema/vega-lite/v2.json&#34;, &#34;description&#34;: &#34;Análise dos volumes máximos e mínimos do reservatório ao longo dos anos.</description>
-    </item>
-    
-  </channel>
-</rss>
