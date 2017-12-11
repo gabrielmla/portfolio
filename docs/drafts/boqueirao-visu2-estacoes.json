@@ -1,0 +1,58 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+    "description": "Analisando o valor mediano do volume de Boqueirão ao longo dos meses.",
+    "width": 640,
+    "data": {
+        "url": "https://api.insa.gov.br/reservatorios/12172/monitoramento",
+        "format": {
+            "type": "json",
+            "property": "volumes",
+            "parse": {
+                "DataInformacao": "utc:%d/%m/%Y"
+            }
+        }
+    },
+    "layer": [
+        {
+            "mark": {
+                "type": "line",
+                "interpolate": "step"
+            },
+            "encoding": {
+                "x": {
+                    "field": "DataInformacao",
+                    "type": "temporal",
+                    "timeUnit": "month",
+                    "axis": {"title": "Meses do ano."}
+                },
+                "y": {
+                    "field": "Volume",
+                    "type": "quantitative",
+                    "aggregate": "median",
+                    "axis": {"title": "Mediana do volume"}
+                },
+                "size": {
+                    "value": 2
+                }
+            }
+        },
+        {
+            "mark": "rule",
+            "encoding": {
+                "y": {
+                    "aggregate": "median",
+                    "field": "Volume",
+                    "type": "quantitative",
+                    "axis": {"title": "Mediana do volume"}
+                },
+                "color": {
+                    "value": "red"
+                },
+                "size": {
+                    "value": 2
+                }
+            }
+        }
+    ]
+
+}
