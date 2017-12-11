@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<style>
+    .axis .domain {
+        display: none;
+    }
+</style>
+<body>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+    var path = 'https://raw.githubusercontent.com/gabrielmla/portfolio/master/dados/lab2-parte4/';
+    var dados_bar = path + 'dados.horario.csv';
+    
+    var width = 800,
+        height = 400;
+    
+    var svg_bar = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+    
+    var margin = {
+            top: 20,
+            right: 20,
+            bottom: 30,
+            left: 40
+        },
+        width = +svg_bar.attr("width") - margin.left - margin.right,
+        height = +svg_bar.attr("height") - margin.top - margin.bottom;
+
+    var x_bar = d3.scaleBand()
+        .rangeRound([0, width])
+        .paddingInner(0.05)
+        .align(0.1);
+
+    var y_bar = d3.scaleLinear()
+        .rangeRound([height, 0]);
+
+    var z_bar = d3.scaleOrdinal()
+        .range(["#8f0d0d", "#b52626", "#f57373", "#ffa3a3", "#5db43d", "#80d163", "#306d84", "#4c849a"]);
+
+    d3.csv(dados_bar, function(d, i, columns) {
+        for (i = 1, t = 0; i < columns.length; ++i) t += d[columns[i]] = +d[columns[i]];
+        d.total = t;
+        return d;
+    }, function(error, data) {
+        if (error) throw error;
+        var g = svg_bar.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var keys = data.columns.slice(1);
+
+        x_bar.domain(data.map(function(d) {
+            return d.horario_inicial;
+        }));
+        y_bar.domain([0, d3.max(data, function(d) {
+            return d.total;
+        })]).nice();
+        z_bar.domain(keys);
+
+        g.append("g")
+            .selectAll("g")
+            .data(d3.stack().keys(keys)(data))
+            .enter().append("g")
+            .attr("fill", function(d) {
+                return z_bar(d.key);
+            })
+            .selectAll("rect")
+            .data(function(d) {
+                return d;
+            })
+            .enter().append("rect")
+            .attr("x", function(d) {
+                return x_bar(d.data.horario_inicial);
+            })
+            .attr("y", function(d) {
+                return y_bar(d[1]);
+            })
+            .attr("height", function(d) {
+                return y_bar(d[0]) - y_bar(d[1]);
+            })
+            .attr("width", x_bar.bandwidth());
+
+        g.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x_bar))
+                .selectAll("text")  
+                .style("text-anchor", "end")
+                .attr("dx", "-.8em")
+                .attr("dy", ".15em")
+                .attr("transform", "rotate(-45)");
+
+        g.append("g")
+            .attr("class", "axis")
+            .call(d3.axisLeft(y_bar).ticks(null, "s"))
+            .append("text")
+            .attr("x", 2)
+            .attr("y", y_bar(y_bar.ticks().pop()) + 0.5)
+            .attr("dy", "0.32em")
+            .attr("fill", "#000")
+            .attr("font-weight", "bold")
+            .attr("text-anchor", "start")
+            .text("Elementos");
+
+        var legend = g.append("g")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", 10)
+            .attr("text-anchor", "end")
+            .selectAll("g")
+            .data(keys.slice().reverse())
+            .enter().append("g")
+            .attr("transform", function(d, i) {
+                return "translate(0," + i * 20 + ")";
+            });
+
+        legend.append("rect")
+            .attr("x", width - 19)
+            .attr("width", 19)
+            .attr("height", 19)
+            .attr("fill", z_bar);
+
+        legend.append("text")
+            .attr("x", width - 24)
+            .attr("y", 9.5)
+            .attr("dy", "0.32em")
+            .text(function(d) {
+                return d;
+            });
+    });
+</script>
+</body>
