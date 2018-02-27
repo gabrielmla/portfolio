@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>Paraíba - Crescimento entre 2011 e 2013 no IDEB</title>
+  <title>Brasil - Indígenas no ensino fundamental</title>
 
   
   
@@ -15,14 +15,14 @@
 
   
   <meta name="author" content="Gabriel Morais" />
-  <meta name="description" content=".cidades { fill: none; stroke: #fff; stroke-linejoin: round; } path:hover, path.highlighted { fill: tomato; } div.tooltip { position: absolute; background-color: white; border: 1px solid black; color: black; font-family:&#34;avenir next&#34;, Arial, sans-serif; padding: 4px 8px; display: none; }        var svg = d3.select(&#34;svg&#34;), width = &#43;svg.attr(&#34;width&#34;), height = &#43;svg.attr(&#34;height&#34;); var path = d3.geoPath(); // a escala de cores var color = d3.scaleThreshold() .domain(d3.range(-30, 61, 15)) ." />
+  <meta name="description" content=".cidades { fill: none; stroke: #fff; stroke-linejoin: round; } path:hover, path.highlighted { fill: tomato; } div.tooltip { position: absolute; background-color: white; border: 1px solid black; color: black; font-family:&#34;avenir next&#34;, Arial, sans-serif; padding: 4px 8px; display: none; }   Quem me dera ao menos uma vez  É um pensamento de muitas crianças indígenas e outras minorias sobre estudar. A partir de dados obtidos do Observatório do Plano Nacional de Educação, vamos analisar a quantidade dessas crianças matriculadas em escolas, públicas e privadas, de ensino fundamental no Brasil." />
 
   
   
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="Paraíba - Crescimento entre 2011 e 2013 no IDEB" />
-    <meta name="twitter:description" content=".cidades { fill: none; stroke: #fff; stroke-linejoin: round; } path:hover, path.highlighted { fill: tomato; } div.tooltip { position: absolute; background-color: white; border: 1px solid black; color: black; font-family:&#34;avenir next&#34;, Arial, sans-serif; padding: 4px 8px; display: none; }        var svg = d3.select(&#34;svg&#34;), width = &#43;svg.attr(&#34;width&#34;), height = &#43;svg.attr(&#34;height&#34;); var path = d3.geoPath(); // a escala de cores var color = d3.scaleThreshold() .domain(d3.range(-30, 61, 15)) ." />
+    <meta name="twitter:title" content="Brasil - Indígenas no ensino fundamental" />
+    <meta name="twitter:description" content=".cidades { fill: none; stroke: #fff; stroke-linejoin: round; } path:hover, path.highlighted { fill: tomato; } div.tooltip { position: absolute; background-color: white; border: 1px solid black; color: black; font-family:&#34;avenir next&#34;, Arial, sans-serif; padding: 4px 8px; display: none; }   Quem me dera ao menos uma vez  É um pensamento de muitas crianças indígenas e outras minorias sobre estudar. A partir de dados obtidos do Observatório do Plano Nacional de Educação, vamos analisar a quantidade dessas crianças matriculadas em escolas, públicas e privadas, de ensino fundamental no Brasil." />
     <meta name="twitter:image" content="https://gabrielmla.github.io/img/avatar.jpg" />
   
 
@@ -32,7 +32,7 @@
 <meta name="generator" content="Hugo 0.36" />
 
 
-<link rel="canonical" href="https://gabrielmla.github.io/portfolio/post/mapa-interativo1/" />
+<link rel="canonical" href="https://gabrielmla.github.io/portfolio/post/brasil-indigena-fundamental/" />
 <link rel="alternative" href="https://gabrielmla.github.io/portfolio/index.xml" title="GABRIEL M." type="application/atom+xml" />
 
 
@@ -189,8 +189,8 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Paraíba - Crescimento entre 2011 e 2013 no IDEB</h1>
-      <p class="post-meta">@Gabriel Morais · Feb 21, 2018 · 2 min read</p>
+      <h1 class="post-title">Brasil - Indígenas no ensino fundamental</h1>
+      <p class="post-meta">@Gabriel Morais · Feb 26, 2018 · 2 min read</p>
     </header>
     <article class="post-content"><!DOCTYPE html>
 <meta charset="utf-8">
@@ -218,12 +218,20 @@ div.tooltip {
 
 </style>
 
+<p>
+	<i>Quem me dera ao menos uma vez</i>
+</p>
+
+<p>
+	É um pensamento de muitas crianças indígenas e outras minorias sobre estudar. A partir de dados obtidos do<b> Observatório do Plano Nacional de Educação</b>, vamos analisar a quantidade dessas crianças matriculadas em escolas, públicas e privadas, de ensino fundamental no Brasil.
+</p>
+
 <svg width="1000" height="600"></svg>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
-<script src="..\..\dados\lab3-parte3\legenda-d3-cor.js"></script>
+<script src="..\..\dados\lab3-parte4\legenda-d3-cor.js"></script>
 <script>
 
 var svg = d3.select("svg"),
@@ -234,14 +242,14 @@ var path = d3.geoPath();
 
 // a escala de cores
 var color = d3.scaleThreshold()
-      .domain(d3.range(-30, 61, 15))
-      .range(d3.schemeSpectral[7]);
+      .domain([0, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000])
+      .range(d3.schemeSpectral[11]);
 
 // função aux definida em legenda-d3-cor.js
-desenhaLegenda(0, 81, color, "Crescimento entre 2011 e 2013 (pp*)")
+desenhaLegenda(0, 2000, color, "Número de alunos indígenas em escolas de E.F.")
 
 d3.queue()
-    .defer(d3.json, "../../dados/lab3-parte3/geo4-municipios-e-aprendizado-simplificado.json")
+    .defer(d3.json, "../../dados/lab3-parte4/geo4-municipios-e-ensino-simplificado.json")
     .await(ready);
 
 function ready(error, dados) {
@@ -255,7 +263,7 @@ function ready(error, dados) {
     .data(cidades)
     .enter()
     .append("path")
-      .attr("fill", d => {valor = d.properties["Crescimento entre 2011 e 2013 (pp*)"]; return valor === "NA" ? '#e0e0eb' : color(valor)})
+      .attr("fill", d => {let valor = d.properties["2016"]; return valor === "NA" ? '#e0e0eb' : color(valor)})
       .attr("d", path)
       .on("mouseover",showTooltip)
       .on("mousemove",moveTooltip)
@@ -289,7 +297,7 @@ function showTooltip(d) {
   moveTooltip();
 
   tooltip.style("display","block")
-      .text(d.properties.Cidade + ": " + d.properties["Crescimento entre 2011 e 2013 (pp*)"] + "%");
+      .text(d.properties.Localidade + ": " + d.properties["2016"]);
 }
 
 //Move the tooltip to track the mouse
@@ -306,9 +314,15 @@ function hideTooltip() {
 </script>
 
 <p>
-  Podemos notar que, em geral, as regiões que estão com maiores indicies de <i>Apredizado Adequado</i> também tiveram maior <i>Crescimento
-    entre 2011 e 2013</i>. Por exemplo <strong>Boa vista</strong> que possui <strong>73.99%</strong>
-  de aprendizado adequado e teve um crecimento de 52.08% entre 2011 e 2013 no desempenho da Prova Brasil.
+	É possivel notar que grande parte do país possui um número muito baixo (0, em maioria) de alunos indígenas matriculados em escolas do E.F. A parte do Brasil com um maior número de matriculados se encontra na região norte, isso talvez seja por causa da fuga do índios para o lado mais interno devido a expansão do homem branco.
+</p>
+
+<p>
+	Os números variavam bastante entre 0 e 2000, porém os dados vão até por volta de 8000 alunos indígenas matriculados. Por isso optei por dar mais enfâse nesses primeiros números do domínio, para melhor visualização do mapa.
+</p>
+
+<p>
+	<i>Como a mais bela tribo</i>
 </p></article>
     <footer class="post-footer">
       
