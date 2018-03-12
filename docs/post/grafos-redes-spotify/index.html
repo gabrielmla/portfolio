@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>Analise sobre boqueirão utilizando d3</title>
+  <title>Redes - Artistas Semelhantes</title>
 
   
   
@@ -15,14 +15,14 @@
 
   
   <meta name="author" content="Gabriel Morais" />
-  <meta name="description" content="Boqueirão Lab 2    Dados de Boqueirão     .mychart circle:hover { fill: rgb(194, 72, 123); } .mychart text { font: 12px sans-serif; text-anchor: left; color: black; }  &#34;use strict&#34; function desenhaBarras(dados) { var alturaSVG = 400, larguraSVG = 650; var margin = { top: 10, right: 20, bottom: 30, left: 45 }, larguraVis = larguraSVG - margin.left - margin.right, alturaVis = alturaSVG - margin." />
+  <meta name="description" content="Aqui vamos analisar os nós (pontos vermelhos) que estão a um grau de distância do artista Hiroyuki Sawano (ponto verde piscina) e a popularidade dos mesmos. Ao passar o mouse sobre um nó é possível visualizar o nome do artista que ele representa.  O tamanho de cada ponto indica a popularidade do artista, quanto maior o nó, mais popular o artista é. A maoria dos artistas nessa rede possuem popularidades semelhantes, porém podemos notar alguns que possuem uma popularidade bem abaixo dos outros na rede." />
 
   
   
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="Analise sobre boqueirão utilizando d3" />
-    <meta name="twitter:description" content="Boqueirão Lab 2    Dados de Boqueirão     .mychart circle:hover { fill: rgb(194, 72, 123); } .mychart text { font: 12px sans-serif; text-anchor: left; color: black; }  &#34;use strict&#34; function desenhaBarras(dados) { var alturaSVG = 400, larguraSVG = 650; var margin = { top: 10, right: 20, bottom: 30, left: 45 }, larguraVis = larguraSVG - margin.left - margin.right, alturaVis = alturaSVG - margin." />
+    <meta name="twitter:title" content="Redes - Artistas Semelhantes" />
+    <meta name="twitter:description" content="Aqui vamos analisar os nós (pontos vermelhos) que estão a um grau de distância do artista Hiroyuki Sawano (ponto verde piscina) e a popularidade dos mesmos. Ao passar o mouse sobre um nó é possível visualizar o nome do artista que ele representa.  O tamanho de cada ponto indica a popularidade do artista, quanto maior o nó, mais popular o artista é. A maoria dos artistas nessa rede possuem popularidades semelhantes, porém podemos notar alguns que possuem uma popularidade bem abaixo dos outros na rede." />
     <meta name="twitter:image" content="https://gabrielmla.github.io/img/avatar.jpg" />
   
 
@@ -32,7 +32,7 @@
 <meta name="generator" content="Hugo 0.36" />
 
 
-<link rel="canonical" href="https://gabrielmla.github.io/portfolio/post/lab2-visudedados/" />
+<link rel="canonical" href="https://gabrielmla.github.io/portfolio/post/grafos-redes-spotify/" />
 <link rel="alternative" href="https://gabrielmla.github.io/portfolio/index.xml" title="GABRIEL M." type="application/atom+xml" />
 
 
@@ -189,125 +189,142 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Analise sobre boqueirão utilizando d3</h1>
-      <p class="post-meta">@Gabriel Morais · Nov 15, 2017 · 1 min read</p>
+      <h1 class="post-title">Redes - Artistas Semelhantes</h1>
+      <p class="post-meta">@Gabriel Morais · Mar 12, 2018 · 2 min read</p>
     </header>
     <article class="post-content"><!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="utf-8">
-    <title>Boqueirão Lab 2</title>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-</head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <h2>Dados de Boqueirão</h2>
-        </div>
-        <div class="row mychart" id="chart">
-        </div>
-    </div>
+	<p>
+		Aqui vamos analisar os nós (pontos vermelhos) que estão a <b>um grau</b> de distância do artista Hiroyuki Sawano (ponto verde piscina) e a popularidade dos mesmos.
+	</p>
 
-    <style>
-        .mychart circle:hover {
-            fill: rgb(194, 72, 123);
-        }
+	<p>Ao passar o mouse sobre um nó é possível visualizar o nome do artista que ele representa.<p>
 
-        .mychart text {
-            font: 12px sans-serif;
-            text-anchor: left;
-            color: black;
-        }
+	<p>
+		O tamanho de cada ponto indica a popularidade do artista, quanto maior o nó, mais popular o artista é. A maoria dos artistas nessa rede possuem popularidades semelhantes, porém podemos notar alguns que possuem uma popularidade bem abaixo dos outros na rede.
+	</p>
+	<div>
 
-    </style>
+	<div class="container">
 
-    <script type="text/javascript">
-        "use strict"
+		<div id="chart"></div>
 
-        function desenhaBarras(dados) {
-            var alturaSVG = 400,
-                larguraSVG = 650;
-            var margin = {
-                    top: 10,
-                    right: 20,
-                    bottom: 30,
-                    left: 45
-                },
-                larguraVis = larguraSVG - margin.left - margin.right,
-                alturaVis = alturaSVG - margin.top - margin.bottom;
+	</div>
+</div>
 
-            var grafico = d3.select('#chart')
-                .append('svg')
-                .attr('width', larguraVis + margin.left + margin.right)
-                .attr('height', alturaVis + margin.top + margin.bottom)
-                .append('g')
-                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+	<style>
+			.node {
+					fill: #ccc;
+					stroke: #fff;
+					stroke-width: 2px;
+			}
 
-            var x = d3.scaleLinear()
-                .domain([Math.min(...dados.map((d, i)=> d.noventa_percentil))-1, Math.max(...dados.map((d, i)=> d.noventa_percentil))+1])
-                .rangeRound([0, larguraVis]);
+			.link {
+					stroke: #999;
+					stroke-opacity: 0.3;
+			}
+		</style>
 
-            var y = d3.scaleLinear()
-                .domain([Math.min(...dados.map((d, i)=> d.dez_percentil))-2, Math.max(...dados.map((d, i)=> d.dez_percentil))+2])
-                .rangeRound([alturaVis, 0]);
 
-            grafico.selectAll('g')
-                .data(dados)
-                .enter()
-                .append('circle')
-                .attr('cx', d => x(d.noventa_percentil))
-                .attr('r', d => 5)
-                .attr('cy', d => y(d.dez_percentil))
-                .attr('fill', d => mesChuvoso(d))
-                .append("svg:title")
-                .text(d => "Mês: " + d.mes);
+	<!-- scripts -->
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script>
+		var file = "../../dados/lab4-parte1/artistas-semelhantes.json";
+		var width = 600,
+		    height = 800;
 
-            /*
-             * Os eixos
-             */
-            grafico.append("g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0," + alturaVis + ")")
-                .call(d3.axisBottom(x));
+		var svg = d3.select("#chart")
+				.append("svg")
+				.attr('version', '1.1')
+				.attr('viewBox', '0 0 '+width+' '+height)
+				.attr('width', '100%');
 
-            grafico.append('g')
-                .attr('transform', 'translate(0,0)')
-                .call(d3.axisLeft(y))
+		var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-            grafico.append("text")
-                .attr("transform", "translate(" + (-30 + larguraVis / 2) + "," + (alturaVis + 30) + ")")
-                .text("Noventa-percentil");
+		var simulation = d3.forceSimulation()
+		    .force("link", d3.forceLink().id(function(d) { return d.id; }))
+		    .force("charge", d3.forceManyBody().strength(-8))
+		    .force("center", d3.forceCenter(width / 2, height / 2));
 
-            grafico.append("text")
-                .attr("transform", "translate(-30," + (alturaVis + margin.top) / 2 + ") rotate(-90)")
-                .text("Dez-percentil");
+		d3.json(file, function(error, graph) {
+		  if (error) throw error;
 
-        }
+			rede_hiroyuki = graph.edges.filter(function(d){ return d.id.search("0Riv2KnFcLZA3JSVryRg4y") != -1}).reduce(function(lista,d){lista.push(d.target); lista.push(d.source); return lista}, [])
+			rede_hiroyuki = Array.from(new Set(rede_hiroyuki));
 
-        function mesChuvoso(dados) {
-            if ((dados.mes > 5 && dados.mes < 9)) {
-                return "#75aeff";
-            } else {
-                return "#ffff60";
-            }
-        };
+		  var link = svg.append("g")
+		      .attr("class", "link")
+		    .selectAll("line")
+		    .data(graph.edges.filter(function(d){ return (rede_hiroyuki.includes(d.source) & rede_hiroyuki.includes(d.target))}))
+		    .enter().append("line");
 
-    d3.csv('https://raw.githubusercontent.com/gabrielmla/intro-d3/master/dados/boqueirao-por-mes.csv', function(dados) {
-            desenhaBarras(dados);
-        });
+		  var node = svg.append("g")
+		      .attr("class", "nodes")
+		    .selectAll("circle")
+					.data(graph.nodes.filter(function(d){ return (rede_hiroyuki.includes(d.id))}))
+		    .enter().append("circle")
+		      .attr("r", function(d) {return (d.size * 0.5) + 2})
+					.attr("opacity",function(d) {  if(d.label === "Hiroyuki Sawano"){ return 0.8} return 0.6; })
+		      .attr("fill", function(d) {  if(d.label === "Hiroyuki Sawano"){ return "#00DAA3"} return "#FF2322"; })
+		      .call(d3.drag()
+		          .on("start", dragstarted)
+		          .on("drag", dragged)
+		          .on("end", dragended));
 
-    </script>
+		  node.append("title")
+		      .text(function(d) { return 'Nome: ' + d.label + '\n' + 'Popularidade: ' + d.size; });
+
+		  simulation
+		      .nodes(graph.nodes)
+		      .on("tick", ticked);
+
+		  simulation.force("link")
+		      .links(graph.edges);
+
+			simulation.force("link")
+		      .links(graph.edges);
+
+		  function ticked() {
+		    link
+		        .attr("x1", function(d) { return d.source.x; })
+		        .attr("y1", function(d) { return d.source.y; })
+		        .attr("x2", function(d) { return d.target.x; })
+		        .attr("y2", function(d) { return d.target.y; });
+
+		    node
+		        .attr("cx", function(d) { return d.x; })
+		        .attr("cy", function(d) { return d.y; });
+
+		  }
+		});
+
+		function dragstarted(d) {
+		  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+		  d.fx = d.x;
+		  d.fy = d.y;
+		}
+
+		function dragged(d) {
+		  d.fx = d3.event.x;
+		  d.fy = d3.event.y;
+		}
+
+		function dragended(d) {
+		  if (!d3.event.active) simulation.alphaTarget(0);
+		  d.fx = null;
+		  d.fy = null;
+		}
+
+</script>
+
 </body>
-
 </html>
 </article>
     <footer class="post-footer">
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.This post was published <strong>117</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.
       </p>
     </footer>
     

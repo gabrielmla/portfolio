@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<body>
+	<h1>Redes - Artistas Spotify</h1>
+
+	<p>
+		Aqui vamos analisar os nós (pontos vermelhos) que estão a <b>um grau</b> de distância do artista Hiroyuki Sawano (ponto verde piscina) e a popularidade dos mesmos.
+	</p>
+
+	<p>Ao passar o mouse sobre um nó é possível visualizar o nome do artista que ele representa.<p>
+	<br>
+	<div>
+
+	<div class="container">
+
+		<div id="chart"></div>
+
+	</div>
+</div>
+
+	<p>
+		O tamanho de cada ponto indica a popularidade do artista, quanto maior o nó, mais popular o artista é. A maoria dos artistas nessa rede possuem popularidades semelhantes, porém podemos notar alguns que possuem uma popularidade bem abaixo dos outros na rede.
+	</p>
+
+	<style>
+			.node {
+					fill: #ccc;
+					stroke: #fff;
+					stroke-width: 2px;
+			}
+
+			.link {
+					stroke: #999;
+					stroke-opacity: 0.3;
+			}
+		</style>
+
+
+	
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script>
+		var
+		    width = 600,
+		    height = 800;
+
+		var svg = d3.select("#chart")
+				.append("svg")
+				.attr('version', '1.1')
+				.attr('viewBox', '0 0 '+width+' '+height)
+				.attr('width', '100%');
+
+		var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+		var simulation = d3.forceSimulation()
+		    .force("link", d3.forceLink().id(function(d) { return d.id; }))
+		    .force("charge", d3.forceManyBody().strength(-8))
+		    .force("center", d3.forceCenter(width / 2, height / 2));
+
+		d3.json("artistas-semelhantes.json", function(error, graph) {
+		  if (error) throw error;
+
+			rede_hiroyuki = graph.edges.filter(function(d){ return d.id.search("0Riv2KnFcLZA3JSVryRg4y") != -1}).reduce(function(lista,d){lista.push(d.target); lista.push(d.source); return lista}, [])
+			rede_hiroyuki = Array.from(new Set(rede_hiroyuki));
+
+		  var link = svg.append("g")
+		      .attr("class", "link")
+		    .selectAll("line")
+		    .data(graph.edges.filter(function(d){ return (rede_hiroyuki.includes(d.source) & rede_hiroyuki.includes(d.target))}))
+		    .enter().append("line");
+
+		  var node = svg.append("g")
+		      .attr("class", "nodes")
+		    .selectAll("circle")
+					.data(graph.nodes.filter(function(d){ return (rede_hiroyuki.includes(d.id))}))
+		    .enter().append("circle")
+		      .attr("r", function(d) {return (d.size * 0.5) + 2})
+					.attr("opacity",function(d) {  if(d.label === "Hiroyuki Sawano"){ return 0.8} return 0.6; })
+		      .attr("fill", function(d) {  if(d.label === "Hiroyuki Sawano"){ return "#00DAA3"} return "#FF2322"; })
+		      .call(d3.drag()
+		          .on("start", dragstarted)
+		          .on("drag", dragged)
+		          .on("end", dragended));
+
+		  node.append("title")
+		      .text(function(d) { return 'Nome: ' + d.label + '\n' + 'Popularidade: ' + d.size; });
+
+		  simulation
+		      .nodes(graph.nodes)
+		      .on("tick", ticked);
+
+		  simulation.force("link")
+		      .links(graph.edges);
+
+			simulation.force("link")
+		      .links(graph.edges);
+
+		  function ticked() {
+		    link
+		        .attr("x1", function(d) { return d.source.x; })
+		        .attr("y1", function(d) { return d.source.y; })
+		        .attr("x2", function(d) { return d.target.x; })
+		        .attr("y2", function(d) { return d.target.y; });
+
+		    node
+		        .attr("cx", function(d) { return d.x; })
+		        .attr("cy", function(d) { return d.y; });
+
+				link2
+		        .attr("x1", function(d) { return d.source.x; })
+		        .attr("y1", function(d) { return d.source.y; })
+		        .attr("x2", function(d) { return d.target.x; })
+		        .attr("y2", function(d) { return d.target.y; });
+
+		    node2
+		        .attr("cx", function(d) { return d.x; })
+		        .attr("cy", function(d) { return d.y; });
+		  }
+		});
+
+		function dragstarted(d) {
+		  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+		  d.fx = d.x;
+		  d.fy = d.y;
+		}
+
+		function dragged(d) {
+		  d.fx = d3.event.x;
+		  d.fy = d3.event.y;
+		}
+
+		function dragended(d) {
+		  if (!d3.event.active) simulation.alphaTarget(0);
+		  d.fx = null;
+		  d.fy = null;
+		}
+
+</script>
+
+</body>
+</html>
