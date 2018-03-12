@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>Dois Mapas</title>
+  <title>Paraíba - Crescimento entre 2011 e 2013 no IDEB</title>
 
   
   
@@ -15,14 +15,14 @@
 
   
   <meta name="author" content="Gabriel Morais" />
-  <meta name="description" content="Nesta visualização de mapas serão analisados os dados sobre alfabetização em domicílios particulares disponíveis no IBGE em conjunto com o mapa da paraíba.  Quantidade de responsáveis alfabetizados de domicilios particulares  Nesta primeira visualização será analisado a quantidade de responsáveis (com mais de 14 anos) alfabetizados nos domicílios. Os valores variaram entre 0 e 530.   É possível notar que a quantidade de responsáveis alfabetizados em geral é baixa, em especial no lado oeste do estado." />
+  <meta name="description" content=".cidades { fill: none; stroke: #fff; stroke-linejoin: round; } path:hover, path.highlighted { fill: tomato; } div.tooltip { position: absolute; background-color: white; border: 1px solid black; color: black; font-family:&#34;avenir next&#34;, Arial, sans-serif; padding: 4px 8px; display: none; }        var svg = d3.select(&#34;svg&#34;), width = &#43;svg.attr(&#34;width&#34;), height = &#43;svg.attr(&#34;height&#34;); var path = d3.geoPath(); // a escala de cores var color = d3.scaleThreshold() .domain(d3.range(-30, 61, 15)) ." />
 
   
   
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="Dois Mapas" />
-    <meta name="twitter:description" content="Nesta visualização de mapas serão analisados os dados sobre alfabetização em domicílios particulares disponíveis no IBGE em conjunto com o mapa da paraíba.  Quantidade de responsáveis alfabetizados de domicilios particulares  Nesta primeira visualização será analisado a quantidade de responsáveis (com mais de 14 anos) alfabetizados nos domicílios. Os valores variaram entre 0 e 530.   É possível notar que a quantidade de responsáveis alfabetizados em geral é baixa, em especial no lado oeste do estado." />
+    <meta name="twitter:title" content="Paraíba - Crescimento entre 2011 e 2013 no IDEB" />
+    <meta name="twitter:description" content=".cidades { fill: none; stroke: #fff; stroke-linejoin: round; } path:hover, path.highlighted { fill: tomato; } div.tooltip { position: absolute; background-color: white; border: 1px solid black; color: black; font-family:&#34;avenir next&#34;, Arial, sans-serif; padding: 4px 8px; display: none; }        var svg = d3.select(&#34;svg&#34;), width = &#43;svg.attr(&#34;width&#34;), height = &#43;svg.attr(&#34;height&#34;); var path = d3.geoPath(); // a escala de cores var color = d3.scaleThreshold() .domain(d3.range(-30, 61, 15)) ." />
     <meta name="twitter:image" content="https://gabrielmla.github.io/img/avatar.jpg" />
   
 
@@ -32,7 +32,7 @@
 <meta name="generator" content="Hugo 0.36" />
 
 
-<link rel="canonical" href="https://gabrielmla.github.io/portfolio/post/dois-mapas/" />
+<link rel="canonical" href="https://gabrielmla.github.io/portfolio/post/mapa-interativo1/" />
 <link rel="alternative" href="https://gabrielmla.github.io/portfolio/index.xml" title="GABRIEL M." type="application/atom+xml" />
 
 
@@ -189,43 +189,127 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Dois Mapas</h1>
-      <p class="post-meta">@Gabriel Morais · Feb 19, 2018 · 1 min read</p>
+      <h1 class="post-title">Paraíba - Crescimento entre 2011 e 2013 no IDEB</h1>
+      <p class="post-meta">@Gabriel Morais · Feb 21, 2018 · 2 min read</p>
     </header>
     <article class="post-content"><!DOCTYPE html>
 <meta charset="utf-8">
-<div id="introducao">
-  <p>
-    Nesta visualização de mapas serão analisados os dados sobre alfabetização em domicílios particulares disponíveis no IBGE em conjunto com o mapa da paraíba.
-  </p>
-</div>
-<div id="texto-responsaveis">
-  <h3>Quantidade de responsáveis alfabetizados de domicilios particulares</h2>
-  <p>
-    Nesta primeira visualização será analisado a quantidade de responsáveis (com mais de 14 anos) alfabetizados nos domicílios. Os valores variaram entre 0 e 530.
-  </p>
-  <div id="mapa-responsaveis">
-    <img src="..\..\dados\lab3-parte2\pb-responsaveis-alfabetizados.svg" width="960" height="auto">
-  <div>
-  <p>
-  	É possível notar que a quantidade de responsáveis alfabetizados em geral é baixa, em especial no lado oeste do estado. Talvez isso se dê devido ao fato que a população é menor nessa área do mapa. Seria mais ideal que os dados fossem normalizados antes.
-  </p>
-</div>
+<style>
 
-<br>
-<div id="texto-filhos">
-  <h3>Quantidade de filhos/entiados alfabetizados de domicilios particulares</h2>
-  <p>
-    Aqui será analisada a quantidade de filhos/enteados alfabetizados. Os valores variaram entre 0 e 599.
-  </p>
-  <div id="mapa-filhos">
-    <img src="..\..\dados\lab3-parte2\pb-responsaveis-filhos-alfabetizados.svg" width="960" height="auto">
-  </div>
-  <p>
-  	É visto rapidamente que o mapa está bem mais preenchido em relação ao anterior, revelando que a taxa de alfabetização está aumentando entre as gerações de paraibanos. As regiões que tinham valores altos na visualização anterior mantiveram esses valores nesta visualização, em geral. Porém, é possível notar que surgiram novas regiões com altos valores da variável, que não tinham aparecido no mapa anterior.
-  </p>
-</div>
-</article>
+.cidades {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}
+
+path:hover, path.highlighted {
+  fill: tomato;
+}
+
+div.tooltip {
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  font-family:"avenir next", Arial, sans-serif;
+  padding: 4px 8px;
+  display: none;
+}
+
+</style>
+
+<svg width="1000" height="600"></svg>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+<script src="..\..\dados\lab3-parte3\legenda-d3-cor.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+var path = d3.geoPath();
+
+// a escala de cores
+var color = d3.scaleThreshold()
+      .domain(d3.range(-30, 61, 15))
+      .range(d3.schemeSpectral[7]);
+
+// função aux definida em legenda-d3-cor.js
+desenhaLegenda(0, 81, color, "Crescimento entre 2011 e 2013 (pp*)")
+
+d3.queue()
+    .defer(d3.json, "../../dados/lab3-parte3/geo4-municipios-e-aprendizado-simplificado.json")
+    .await(ready);
+
+function ready(error, dados) {
+  if (error) throw error;
+
+  var cidades = dados.features;
+
+  svg.append("g")
+      .attr("class", "cidades")
+    .selectAll("path")
+    .data(cidades)
+    .enter()
+    .append("path")
+      .attr("fill", d => {valor = d.properties["Crescimento entre 2011 e 2013 (pp*)"]; return valor === "NA" ? '#e0e0eb' : color(valor)})
+      .attr("d", path)
+      .on("mouseover",showTooltip)
+      .on("mousemove",moveTooltip)
+      .on("mouseout",hideTooltip)
+}
+
+// ZOOM
+
+//create zoom handler
+var zoom_handler = d3.zoom()
+    .on("zoom", zoom_actions);
+
+//specify what to do when zoom event listener is triggered
+function zoom_actions(){
+ d3.selectAll("path").attr("transform", d3.event.transform);
+}
+
+//add zoom behaviour to the svg element
+//same as svg.call(zoom_handler);
+zoom_handler(svg);
+
+
+// TOOLTIP
+
+//Create a tooltip, hidden at the start
+var tooltip = d3.select("body").append("div").attr("class","tooltip");
+//Position of the tooltip relative to the cursor
+var tooltipOffset = {x: 5, y: -25};
+
+function showTooltip(d) {
+  moveTooltip();
+
+  tooltip.style("display","block")
+      .text(d.properties.Cidade + ": " + d.properties["Crescimento entre 2011 e 2013 (pp*)"] + "%");
+}
+
+//Move the tooltip to track the mouse
+function moveTooltip() {
+  tooltip.style("top",(d3.event.pageY+tooltipOffset.y)+"px")
+      .style("left",(d3.event.pageX+tooltipOffset.x)+"px");
+}
+
+//Create a tooltip, hidden at the start
+function hideTooltip() {
+  tooltip.style("display","none");
+}
+
+</script>
+
+<p>
+  Podemos notar que, em geral, as regiões que estão com maiores indicies de <i>Apredizado Adequado</i> também tiveram maior <i>Crescimento
+    entre 2011 e 2013</i>. Por exemplo <strong>Boa vista</strong> que possui <strong>73.99%</strong>
+  de aprendizado adequado e teve um crecimento de 52.08% entre 2011 e 2013 no desempenho da Prova Brasil.
+</p></article>
     <footer class="post-footer">
       
       <p class="post-copyright">
