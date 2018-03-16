@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.</copyright>
-    <lastBuildDate>Mon, 12 Mar 2018 18:52:00 -0300</lastBuildDate>
+    <lastBuildDate>Fri, 16 Mar 2018 13:46:41 -0300</lastBuildDate>
     
 	<atom:link href="https://gabrielmla.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Meu top 50 artistas do Spotify</title>
+      <link>https://gabrielmla.github.io/portfolio/post/top50spotify/</link>
+      <pubDate>Fri, 16 Mar 2018 13:46:41 -0300</pubDate>
+      
+      <guid>https://gabrielmla.github.io/portfolio/post/top50spotify/</guid>
+      <description>Directive by HTML5 UP   .nodes image { clip-path: circle(30% at 50% 50%); -webkit-clip-path: circle(30% at 50% 50%); cursor: pointer; } .label { font-family: &#39;Raleway&#39;, sans-serif; } div.tooltip { position: absolute; text-align: center; width: 110px; font-family: &#39;Raleway&#39;, sans-serif; font-size: 10px; background: #2F2F2F; color: #FFF; pointer-events: none; z-index: 100; } .greyed { filter: url(&#34;#greyscale&#34;); filter: greyscale(100%); } .legendlabel { font-size: 10px; text-transform: capitalize; } .legend-hover { font-weight: bold; } .</description>
+    </item>
     
     <item>
       <title>Redes - Artistas Semelhantes</title>

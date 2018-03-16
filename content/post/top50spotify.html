@@ -1,0 +1,369 @@
+---
+title: "Meu top 50 artistas do Spotify"
+date: 2018-03-16T13:46:41-03:00
+draft: false
+---
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>Directive by HTML5 UP</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+
+.nodes image {
+    clip-path: circle(30% at 50% 50%);
+    -webkit-clip-path: circle(30% at 50% 50%);
+    cursor: pointer;
+}
+
+.label {
+    font-family: 'Raleway', sans-serif;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 110px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    background: #2F2F2F;
+    color: #FFF;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.greyed {
+    filter: url("#greyscale");
+    filter: greyscale(100%);
+}
+
+.legendlabel {
+    font-size: 10px;
+    text-transform: capitalize;
+}
+
+.legend-hover {
+    font-weight: bold;
+}
+
+.legendlabel:hover{
+    font-weight: bold;
+}
+
+</style>
+
+<p>
+	Sempre acreditei que meus gêneros musicais mais escutados são <i>pop</i> e <i>rap</i>, porém nunca havia coletado e feito uma analise com esses dados para confirmar esse pensamento.
+</p>
+
+<p>
+    Para realizar esta tarefa será utilizada a API do <b>Spotify</b>, com ela posso obter, por exemplo, meu top 50 artistas mais escutados nos últimos 4 meses. Além disso, será utilizada a biblioteca <b>d3</b> para montar a visualização a partir dos dados coletados.
+</p>
+
+<svg width="1280" height="720"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
+<script>
+
+const svg = d3.select('svg'),
+    width = +svg.attr('width'),
+    height = +svg.attr('height');
+
+const tooltipDiv = d3.select("body")
+    .append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+
+const color = d3.scaleOrdinal(d3.schemeCategory20);
+
+const simulation = d3.forceSimulation()
+    .force('link', d3.forceLink().id(d => d.id))
+    .force('collide', d3.forceCollide(35))
+    .force('center', d3.forceCenter((width / 2), height / 2))
+    .force('genreX', d3.forceX(genreX).strength(0.02))
+    .force('genreY', d3.forceY(genreY));
+
+svg.append('g')
+    .attr('class', 'category-legend')
+    .attr('transform', 'translate(20,20)');
+
+const legend = d3.legendColor()
+    .shape('circle')
+    .shapeRadius('5')
+    .orient('vertical')
+    .classPrefix('legend');
+
+
+d3.json('mytop50.json', function (error, json) {
+    if (error) throw error;
+
+    var artistas = json.items;
+    var nodes = artistas.map(createNodes);
+    var edges = artistas.map(createEdges);
+    var d = [];
+
+    // Deixa os edges concatenados, tira dos arrays
+    for(var i = 0; i < edges.length; i++){
+      for(var j = 0; j < edges[i].length; j++){
+        if(!d.includes(edges[i][j])){
+          d.push(edges[i][j]);
+        }
+      }
+    }
+
+    var graph = {nodes: nodes, edges: d};
+
+    const types = d3.set(graph.edges.map(e => e.type)).values();
+    color.domain(types);
+
+    legend
+        .scale(color)
+        .on('cellover', c => {
+            d3.selectAll('.links line')
+                .transition().duration(200)
+                .attr('opacity', d => d.type === c ? 1 : 0);
+
+            d3.selectAll('.node image')
+                .filter(n => {
+                   return graph.edges
+                       .filter(e => e.type === c)
+                       .find(e => e.source.id === n.id || e.target.id === n.id) !== undefined;
+                })
+                .attr('x', n => -33)
+                .attr('y', n => -33)
+                .attr('width', 66)
+                .attr('height', 66);
+        })
+        .on('cellout', () => {
+            d3.selectAll('.links line')
+                .transition().duration(200)
+                .attr('opacity', 1);
+
+            d3.selectAll('.node image')
+                .attr('x', n => -25)
+                .attr('y', n => -25)
+                .attr('width', 50)
+                .attr('height', 50);
+        });
+
+    svg.select('.category-legend')
+        .call(legend);
+
+    const link = svg.append('g')
+        .attr('class', 'links')
+        .selectAll('line')
+        .data(graph.edges)
+        .enter()
+        .append('line')
+        .style('stroke', e => color(e.type))
+        .attr('stroke-width', 1)
+        .on('mouseover', d => {
+            d3.selectAll('.legendlabel')
+                .filter(l => l === d.type)
+                .classed('legend-hover', true);
+        })
+        .on('mouseout', () => {
+            d3.selectAll('.legendlabel')
+                .classed('legend-hover', false);
+        });
+
+    const nodeGroup = svg.append('g')
+        .attr('class', 'nodes')
+        .selectAll('.node')
+        .data(graph.nodes)
+        .enter()
+        .append('g')
+        .attr('class', 'node')
+        .call(d3.drag()
+            .on('start', dragstarted)
+            .on('drag', dragged)
+            .on('end', dragended));
+
+    nodeGroup
+        .append('image')
+        .attr('xlink:href', d => d.img)
+        .attr('x', -25)
+        .attr('y', -25)
+        .attr('width', 50)
+        .attr('height', 50)
+        .on('mouseover', (d, i, nodes) => {
+            svg.selectAll('.links line')
+                .transition()
+                .duration(200)
+                .attr('opacity', e => d.id === e.source.id || d.id === e.target.id ? 1 : 0);
+
+            tooltipDiv.transition()
+                .duration(200)
+                .style('opacity', 0.7);
+            tooltipDiv.html(`${d.name}`)
+                .style("left", d3.event.pageX + "px")
+                .style("top", d3.event.pageY + "px");
+
+            d3.selectAll(nodes)
+                .classed('greyed', n => n.id !== d.id && !isAdjacent(d, n))
+                .transition().duration(200)
+                .attr('x', n => isAdjacent(d, n) ? -33 : -25)
+                .attr('y', n => isAdjacent(d, n) ? -33 : -25)
+                .attr('width', n => isAdjacent(d, n) ? 66 : 50)
+                .attr('height', n => isAdjacent(d, n) ? 66 : 50);
+
+            d3.select(nodes[i])
+                .transition()
+                .duration(200)
+                .attr('x', -40)
+                .attr('y', -40)
+                .attr('width', 80)
+                .attr('height', 80);
+
+            d3.selectAll('.legendlabel')
+                .filter(l => {
+                    return graph.edges
+                        .filter(e => e.source.id === d.id || e.target.id === d.id)
+                        .map(e => e.type)
+                        .includes(l);
+                })
+                .classed('legend-hover', true);
+
+        })
+        .on('mouseout', (d, i, nodes) => {
+            svg.selectAll('.links line')
+                .transition()
+                .duration(200)
+                .attr('opacity', 1)
+                .attr('stroke-width', 1)
+                .style('stroke', e => color(e.type));
+
+            tooltipDiv.transition()
+                .duration(200)
+                .style('opacity', 0);
+
+            d3.selectAll(nodes)
+                .classed('greyed', false)
+                .transition()
+                .duration(200)
+                .attr('x', -25)
+                .attr('y', -25)
+                .attr('width', 50)
+                .attr('height', 50);
+
+            d3.selectAll('.legendlabel')
+                .classed('legend-hover', false);
+            const node = d3.selectAll('.node')
+                .filter(n => d.id === n.id);
+
+            node.select('rect')
+                .remove();
+
+            node.select('text')
+                .remove();
+        })
+        .on('click', d => window.open(d.url));
+
+    simulation
+        .nodes(graph.nodes)
+        .on('tick', ticked);
+
+    simulation.force('link')
+        .links(graph.edges);
+
+    function ticked() {
+        link
+            .attr('x1', d => d.source.x)
+            .attr('y1', d => d.source.y)
+            .attr('x2', d =>  d.target.x)
+            .attr('y2', d => d.target.y);
+
+        nodeGroup.attr('transform', d => `translate(${d.x}, ${d.y})`);
+    }
+
+    function isAdjacent(source, node) {
+        return graph.edges
+            .filter(e => e.source.id === source.id || e.target.id === source.id)
+            .find(e => e.target.id === node.id || e.source.id === node.id) !== undefined;
+    }
+});
+
+function dragstarted(d) {
+    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+}
+
+function dragged(d) {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+}
+
+function genreX(n) {
+    const genres = n.genres.join('-');
+    if (genres.includes('dance pop') || genres.includes('rap')) {
+        return width / 4 * 4;
+    } else if (genres.includes('pop rap')) {
+        return width / 4;
+    } else {
+        return width + 50;
+    }
+}
+
+function genreY(n) {
+    const genres = n.genres.join('-');
+    if (genres.length === 0 && !genres.includes('dance pop') || genres.includes('rap') || genres.includes('pop rap')) {
+        return height / 4 * 3;
+    } else {
+        return height / 2;
+    }
+}
+
+function dragended(d) {
+    if (!d3.event.active) simulation.alphaTarget(0);
+    d.fx = null;
+    d.fy = null;
+}
+
+function createEdges(element, index, array){
+  var edges = [];
+  for(var i = 0; i < array.length; i++){
+    if(array[i].id != element.id){
+      for(var j = 0; j < element.genres.length; j++){
+        for(var k = 0; k < array[i].genres.length; k++){
+          if(element.genres[j] === array[i].genres[k] && element.genres[j] != 'pop'){
+            edges.push({source: element.id, target: array[i].id, type: element.genres[j]});
+          }
+        }
+      }
+    }
+  }
+  return edges;
+}
+
+function createNodes(element, index, array){
+  return {id: element.id, name: element.name, img: element.images[2].url, url: element.external_urls.spotify, genres: element.genres};
+}
+
+</script>
+
+<h6>
+	Ao clicar em um artista você será redirecionado para a página do Spotify do mesmo.
+</h6>
+
+<p>
+    Os nós indicam os artistas e as arestas indicam com qual gênero os nós se relacionam. Ao fazer <i>hover</i> em um nó, é mostrado apenas os nós e arestas que se conectam com o nó selecionado. Também é possível realizar uma filtragem fazendo hover dos gêneros na legendal.
+</p>
+
+<p>
+    Inicialmente é notado um cluster de nós relacionados pelo gênero <i>Dance Pop</i>, era algo esperado já que é o gênero que mais escuto e com a maior diversidade de artistas. Existe também um grupo de artistas de <i>Rap</i> próximos a esse grupo de artistas <i>Pop</i>, isso se dá devido a existência de artistas de <i>Rap</i> que também possuem músicas <i>Pop</i>.
+</p>
+
+<p>
+    O artista James Blake é uma <b>ponte</b> entre o grupo de <i>Pop/Rap</i> com artistas de grupos <i>Indie</i> e <i>Rock</i>. Nota-se também que dois grupos que não estão conectados com o cluster central, o grupo de artistas de gênero <i>Soundtrack</i> e <i>Chiptune</i> e os artistas brasileiros. Por último temos o artista Elvis Presley isolado de todos os outros nós :(
+</p>
+
+<p>
+    No geral o resultado não me surpreendeu e confirmou meu pensamento inicial. Mas se for para destacar um ponto, seria a pequena quantidade de artistas <i>Rap</i>, eu esperava uma maior quantidade, talvez deva passar a escutar artistas mais diversificados. Enfim, é isso, espero que tenham gostado!
+</p>
