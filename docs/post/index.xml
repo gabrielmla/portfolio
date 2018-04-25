@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.</copyright>
-    <lastBuildDate>Fri, 16 Mar 2018 13:46:41 -0300</lastBuildDate>
+    <lastBuildDate>Wed, 25 Apr 2018 10:49:24 -0300</lastBuildDate>
     
 	<atom:link href="https://gabrielmla.github.io/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Análise de séries (parte 1) - Black Mirror e Mr Robot</title>
+      <link>https://gabrielmla.github.io/portfolio/post/lab1-parte1-ad1/</link>
+      <pubDate>Wed, 25 Apr 2018 10:49:24 -0300</pubDate>
+      
+      <guid>https://gabrielmla.github.io/portfolio/post/lab1-parte1-ad1/</guid>
+      <description>code{white-space: pre;} pre:not([class]) { background-color: white; }  if (window.hljs &amp;&amp; document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) { window.setTimeout(function() { hljs.initHighlighting(); }, 0); }  .table th:not([align]) { text-align: left; }    .main { max-width: 1280px; } .post-content img { box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.15); } .main-container { margin-left: auto; margin-right: auto; } code { color: inherit; background-color: rgba(0, 0, 0, 0.</description>
+    </item>
     
     <item>
       <title>Meu top 50 artistas do Spotify</title>
@@ -18,7 +27,7 @@
       <pubDate>Fri, 16 Mar 2018 13:46:41 -0300</pubDate>
       
       <guid>https://gabrielmla.github.io/portfolio/post/top50spotify/</guid>
-      <description>Directive by HTML5 UP   .nodes image { clip-path: circle(30% at 50% 50%); -webkit-clip-path: circle(30% at 50% 50%); cursor: pointer; } .label { font-family: &#39;Raleway&#39;, sans-serif; } div.tooltip { position: absolute; text-align: center; width: 110px; font-family: &#39;Raleway&#39;, sans-serif; font-size: 10px; background: #2F2F2F; color: #FFF; pointer-events: none; z-index: 100; } .greyed { filter: url(&#34;#greyscale&#34;); filter: greyscale(100%); } .legendlabel { font-size: 10px; text-transform: capitalize; } .legend-hover { font-weight: bold; } .</description>
+      <description>Directive by HTML5 UP.nodes image {clip-path: circle(30% at 50% 50%);-webkit-clip-path: circle(30% at 50% 50%);cursor: pointer;}.label {font-family: &#39;Raleway&#39;, sans-serif;}div.tooltip {position: absolute;text-align: center;width: 110px;font-family: &#39;Raleway&#39;, sans-serif;font-size: 10px;background: #2F2F2F;color: #FFF;pointer-events: none;z-index: 100;}.greyed {filter: url(&#34;#greyscale&#34;);filter: greyscale(100%);}.legendlabel {font-size: 10px;text-transform: capitalize;}.legend-hover {font-weight: bold;}.</description>
     </item>
     
     <item>
@@ -27,7 +36,7 @@
       <pubDate>Mon, 12 Mar 2018 18:52:00 -0300</pubDate>
       
       <guid>https://gabrielmla.github.io/portfolio/post/grafos-redes-spotify/</guid>
-      <description>Aqui vamos analisar os nós (pontos vermelhos) que estão a um grau de distância do artista Hiroyuki Sawano (ponto verde piscina) e a popularidade dos mesmos. Ao passar o mouse sobre um nó é possível visualizar o nome do artista que ele representa.  O tamanho de cada ponto indica a popularidade do artista, quanto maior o nó, mais popular o artista é. A maoria dos artistas nessa rede possuem popularidades semelhantes, porém podemos notar alguns que possuem uma popularidade bem abaixo dos outros na rede.</description>
+      <description>Aqui vamos analisar os nós (pontos vermelhos) que estão a um grau de distância do artista Hiroyuki Sawano (ponto verde piscina) e a popularidade dos mesmos.Ao passar o mouse sobre um nó é possível visualizar o nome do artista que ele representa.O tamanho de cada ponto indica a popularidade do artista, quanto maior o nó, mais popular o artista é. A maoria dos artistas nessa rede possuem popularidades semelhantes, porém podemos notar alguns que possuem uma popularidade bem abaixo dos outros na rede.</description>
     </item>
     
     <item>
@@ -36,7 +45,7 @@
       <pubDate>Mon, 26 Feb 2018 19:45:35 -0300</pubDate>
       
       <guid>https://gabrielmla.github.io/portfolio/post/brasil-indigena-fundamental/</guid>
-      <description>.cidades { fill: none; stroke: #fff; stroke-linejoin: round; } path:hover, path.highlighted { fill: tomato; } div.tooltip { position: absolute; background-color: white; border: 1px solid black; color: black; font-family:&#34;avenir next&#34;, Arial, sans-serif; padding: 4px 8px; display: none; }   Quem me dera ao menos uma vez  É um pensamento de muitas crianças indígenas e outras minorias sobre estudar. A partir de dados obtidos do Observatório do Plano Nacional de Educação, vamos analisar a quantidade dessas crianças matriculadas em escolas, públicas e privadas, de ensino fundamental no Brasil.</description>
+      <description>.cidades {fill: none;stroke: #fff;stroke-linejoin: round;}path:hover, path.highlighted {fill: tomato;}div.tooltip {position: absolute;background-color: white;border: 1px solid black;color: black;font-family:&#34;avenir next&#34;, Arial, sans-serif;padding: 4px 8px;display: none;}Quem me dera ao menos uma vezÉ um pensamento de muitas crianças indígenas e outras minorias sobre estudar. A partir de dados obtidos do Observatório do Plano Nacional de Educação, vamos analisar a quantidade dessas crianças matriculadas em escolas, públicas e privadas, de ensino fundamental no Brasil.</description>
     </item>
     
     <item>
@@ -45,7 +54,7 @@
       <pubDate>Wed, 21 Feb 2018 22:09:13 -0300</pubDate>
       
       <guid>https://gabrielmla.github.io/portfolio/post/mapa-interativo1/</guid>
-      <description>.cidades { fill: none; stroke: #fff; stroke-linejoin: round; } path:hover, path.highlighted { fill: tomato; } div.tooltip { position: absolute; background-color: white; border: 1px solid black; color: black; font-family:&#34;avenir next&#34;, Arial, sans-serif; padding: 4px 8px; display: none; }        var svg = d3.select(&#34;svg&#34;), width = +svg.attr(&#34;width&#34;), height = +svg.attr(&#34;height&#34;); var path = d3.geoPath(); // a escala de cores var color = d3.scaleThreshold() .domain(d3.range(-30, 61, 15)) .</description>
+      <description>.cidades {fill: none;stroke: #fff;stroke-linejoin: round;}path:hover, path.highlighted {fill: tomato;}div.tooltip {position: absolute;background-color: white;border: 1px solid black;color: black;font-family:&#34;avenir next&#34;, Arial, sans-serif;padding: 4px 8px;display: none;}var svg = d3.select(&#34;svg&#34;),width = +svg.attr(&#34;width&#34;),height = +svg.attr(&#34;height&#34;);var path = d3.geoPath();// a escala de coresvar color = d3.scaleThreshold().domain(d3.range(-30, 61, 15)).</description>
     </item>
     
     <item>
@@ -54,7 +63,7 @@
       <pubDate>Mon, 19 Feb 2018 18:49:01 -0300</pubDate>
       
       <guid>https://gabrielmla.github.io/portfolio/post/dois-mapas/</guid>
-      <description>Nesta visualização de mapas serão analisados os dados sobre alfabetização em domicílios particulares disponíveis no IBGE em conjunto com o mapa da paraíba.  Quantidade de responsáveis alfabetizados de domicilios particulares  Nesta primeira visualização será analisado a quantidade de responsáveis (com mais de 14 anos) alfabetizados nos domicílios. Os valores variaram entre 0 e 530.   É possível notar que a quantidade de responsáveis alfabetizados em geral é baixa, em especial no lado oeste do estado.</description>
+      <description>Nesta visualização de mapas serão analisados os dados sobre alfabetização em domicílios particulares disponíveis no IBGE em conjunto com o mapa da paraíba.Quantidade de responsáveis alfabetizados de domicilios particularesNesta primeira visualização será analisado a quantidade de responsáveis (com mais de 14 anos) alfabetizados nos domicílios. Os valores variaram entre 0 e 530.É possível notar que a quantidade de responsáveis alfabetizados em geral é baixa, em especial no lado oeste do estado.</description>
     </item>
     
     <item>
@@ -63,7 +72,7 @@
       <pubDate>Sun, 10 Dec 2017 13:51:32 -0300</pubDate>
       
       <guid>https://gabrielmla.github.io/portfolio/post/lab2-visudedados-roam/</guid>
-      <description>#donut-div .arc text { font: 10px sans-serif; text-anchor: middle; } #donut-div .arc path { stroke: #fff; } #donut-div polyline { opacity: .3; stroke: black; stroke-width: 2px; fill: none; }   #bar-div .axis .domain { display: none; }   #line-div .axis--x path { display: none; } #line-div .line { fill: none; stroke: steelblue; stroke-width: 1.5px; }   Na cidade onde nasci, Campina Grande - PB, um dos pontos turísticos mais movimentado é o Açude Velho.</description>
+      <description>#donut-div .arc text {font: 10px sans-serif;text-anchor: middle;}#donut-div .arc path {stroke: #fff;}#donut-div polyline {opacity: .3;stroke: black;stroke-width: 2px;fill: none;}#bar-div .axis .domain {display: none;}#line-div .axis--x path {display: none;}#line-div .line {fill: none;stroke: steelblue;stroke-width: 1.5px;}Na cidade onde nasci, Campina Grande - PB, um dos pontos turísticos mais movimentado é o Açude Velho.</description>
     </item>
     
     <item>
@@ -72,7 +81,7 @@
       <pubDate>Wed, 15 Nov 2017 16:37:49 -0300</pubDate>
       
       <guid>https://gabrielmla.github.io/portfolio/post/lab2-visudedados/</guid>
-      <description>Boqueirão Lab 2    Dados de Boqueirão     .mychart circle:hover { fill: rgb(194, 72, 123); } .mychart text { font: 12px sans-serif; text-anchor: left; color: black; }  &#34;use strict&#34; function desenhaBarras(dados) { var alturaSVG = 400, larguraSVG = 650; var margin = { top: 10, right: 20, bottom: 30, left: 45 }, larguraVis = larguraSVG - margin.left - margin.right, alturaVis = alturaSVG - margin.</description>
+      <description>Boqueirão Lab 2Dados de Boqueirão.mychart circle:hover {fill: rgb(194, 72, 123);}.mychart text {font: 12px sans-serif;text-anchor: left;color: black;}&#34;use strict&#34;function desenhaBarras(dados) {var alturaSVG = 400,larguraSVG = 650;var margin = {top: 10,right: 20,bottom: 30,left: 45},larguraVis = larguraSVG - margin.left - margin.right,alturaVis = alturaSVG - margin.</description>
     </item>
     
     <item>
@@ -92,7 +101,7 @@ Começarei analisando o volume máximo e mínimo dos anos no reservátorio de Bo
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://gabrielmla.github.io/portfolio/post/labgrafos/</guid>
-      <description>Redes - Artistas Spotify  Aqui vamos analisar os nós (pontos vermelhos) que estão a um grau de distância do artista Hiroyuki Sawano (ponto verde piscina) e a popularidade dos mesmos. Ao passar o mouse sobre um nó é possível visualizar o nome do artista que ele representa.      O tamanho de cada ponto indica a popularidade do artista, quanto maior o nó, mais popular o artista é.</description>
+      <description>Redes - Artistas SpotifyAqui vamos analisar os nós (pontos vermelhos) que estão a um grau de distância do artista Hiroyuki Sawano (ponto verde piscina) e a popularidade dos mesmos.Ao passar o mouse sobre um nó é possível visualizar o nome do artista que ele representa.O tamanho de cada ponto indica a popularidade do artista, quanto maior o nó, mais popular o artista é.</description>
     </item>
     
   </channel>
