@@ -2,104 +2,104 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on GABRIEL M.</title>
-    <link>/post/</link>
+    <link>/portfolio/post/</link>
     <description>Recent content in Posts on GABRIEL M.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.</copyright>
     <lastBuildDate>Mon, 30 Apr 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/portfolio/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lab 1 - Checkpoint 2 - Minhas perguntas</title>
-      <link>/post/lab1-minhas-perguntas/</link>
+      <link>/portfolio/post/lab1-minhas-perguntas/</link>
       <pubDate>Mon, 30 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/lab1-minhas-perguntas/</guid>
+      <guid>/portfolio/post/lab1-minhas-perguntas/</guid>
       <description>Sobre os dados Esta análise foi realizada utilizando dados sobre avaliações de episódios de séries presentes no IMDB até julho de 2017, nesse relátorio se encontram análises para as séries Black Mirror, Mr Robot e 13 Reasons Why. Mais informações sobre esses dados podem ser encontradas neste repositório.
 dados = read_csv(here(&amp;quot;content/dados/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) %&amp;gt;% filter(series_name %in% c(&amp;quot;Black Mirror&amp;quot;, &amp;quot;Mr Robot&amp;quot;, &amp;quot;13 Reasons Why&amp;quot;))  Quanto maior o número de episódios, mais popular a série?</description>
     </item>
     
     <item>
       <title>Lab 1 - Checkpoint 1 - Nossas Perguntas</title>
-      <link>/post/lab1-nossas-perguntas/</link>
+      <link>/portfolio/post/lab1-nossas-perguntas/</link>
       <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/lab1-nossas-perguntas/</guid>
+      <guid>/portfolio/post/lab1-nossas-perguntas/</guid>
       <description>dados = read_csv(here(&amp;quot;content/dados/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) %&amp;gt;% filter(series_name %in% c(&amp;quot;Black Mirror&amp;quot;, &amp;quot;Mr Robot&amp;quot;)) series &amp;lt;- dados %&amp;gt;% group_by(series_name) %&amp;gt;% summarise(n = n())  Qual das séries que você escolheu é mais bem avaliada no IMDB? A diferença é grande? Pequena? Muda de acordo com as temporadas da série? boxplot.user_ratings &amp;lt;- dados %&amp;gt;% ggplot(aes(x = &amp;quot;&amp;quot;, y = user_rating)) + geom_boxplot(width = .</description>
     </item>
     
     <item>
       <title>Meu top 50 artistas do Spotify</title>
-      <link>/post/top50spotify/</link>
+      <link>/portfolio/post/top50spotify/</link>
       <pubDate>Fri, 16 Mar 2018 13:46:41 -0300</pubDate>
       
-      <guid>/post/top50spotify/</guid>
+      <guid>/portfolio/post/top50spotify/</guid>
       <description>Directive by HTML5 UP   .nodes image { clip-path: circle(30% at 50% 50%); -webkit-clip-path: circle(30% at 50% 50%); cursor: pointer; } .label { font-family: &#39;Raleway&#39;, sans-serif; } div.tooltip { position: absolute; text-align: center; width: 110px; font-family: &#39;Raleway&#39;, sans-serif; font-size: 10px; background: #2F2F2F; color: #FFF; pointer-events: none; z-index: 100; } .greyed { filter: url(&#34;#greyscale&#34;); filter: greyscale(100%); } .legendlabel { font-size: 10px; text-transform: capitalize; } .legend-hover { font-weight: bold; } .</description>
     </item>
     
     <item>
       <title>Redes - Artistas Semelhantes</title>
-      <link>/post/grafos-redes-spotify/</link>
+      <link>/portfolio/post/grafos-redes-spotify/</link>
       <pubDate>Mon, 12 Mar 2018 18:52:00 -0300</pubDate>
       
-      <guid>/post/grafos-redes-spotify/</guid>
+      <guid>/portfolio/post/grafos-redes-spotify/</guid>
       <description>Aqui vamos analisar os nós (pontos vermelhos) que estão a um grau de distância do artista Hiroyuki Sawano (ponto verde piscina) e a popularidade dos mesmos. Ao passar o mouse sobre um nó é possível visualizar o nome do artista que ele representa.  O tamanho de cada ponto indica a popularidade do artista, quanto maior o nó, mais popular o artista é. A maoria dos artistas nessa rede possuem popularidades semelhantes, porém podemos notar alguns que possuem uma popularidade bem abaixo dos outros na rede.</description>
     </item>
     
     <item>
       <title>Brasil - Indígenas no ensino fundamental</title>
-      <link>/post/brasil-indigena-fundamental/</link>
+      <link>/portfolio/post/brasil-indigena-fundamental/</link>
       <pubDate>Mon, 26 Feb 2018 19:45:35 -0300</pubDate>
       
-      <guid>/post/brasil-indigena-fundamental/</guid>
+      <guid>/portfolio/post/brasil-indigena-fundamental/</guid>
       <description>.cidades { fill: none; stroke: #fff; stroke-linejoin: round; } path:hover, path.highlighted { fill: tomato; } div.tooltip { position: absolute; background-color: white; border: 1px solid black; color: black; font-family:&#34;avenir next&#34;, Arial, sans-serif; padding: 4px 8px; display: none; }   Quem me dera ao menos uma vez  É um pensamento de muitas crianças indígenas e outras minorias sobre estudar. A partir de dados obtidos do Observatório do Plano Nacional de Educação, vamos analisar a quantidade dessas crianças matriculadas em escolas, públicas e privadas, de ensino fundamental no Brasil.</description>
     </item>
     
     <item>
       <title>Paraíba - Crescimento entre 2011 e 2013 no IDEB</title>
-      <link>/post/mapa-interativo1/</link>
+      <link>/portfolio/post/mapa-interativo1/</link>
       <pubDate>Wed, 21 Feb 2018 22:09:13 -0300</pubDate>
       
-      <guid>/post/mapa-interativo1/</guid>
+      <guid>/portfolio/post/mapa-interativo1/</guid>
       <description>.cidades { fill: none; stroke: #fff; stroke-linejoin: round; } path:hover, path.highlighted { fill: tomato; } div.tooltip { position: absolute; background-color: white; border: 1px solid black; color: black; font-family:&#34;avenir next&#34;, Arial, sans-serif; padding: 4px 8px; display: none; }        var svg = d3.select(&#34;svg&#34;), width = +svg.attr(&#34;width&#34;), height = +svg.attr(&#34;height&#34;); var path = d3.geoPath(); // a escala de cores var color = d3.scaleThreshold() .domain(d3.range(-30, 61, 15)) .</description>
     </item>
     
     <item>
       <title>Dois Mapas</title>
-      <link>/post/dois-mapas/</link>
+      <link>/portfolio/post/dois-mapas/</link>
       <pubDate>Mon, 19 Feb 2018 18:49:01 -0300</pubDate>
       
-      <guid>/post/dois-mapas/</guid>
+      <guid>/portfolio/post/dois-mapas/</guid>
       <description>Nesta visualização de mapas serão analisados os dados sobre alfabetização em domicílios particulares disponíveis no IBGE em conjunto com o mapa da paraíba.  Quantidade de responsáveis alfabetizados de domicilios particulares  Nesta primeira visualização será analisado a quantidade de responsáveis (com mais de 14 anos) alfabetizados nos domicílios. Os valores variaram entre 0 e 530.   É possível notar que a quantidade de responsáveis alfabetizados em geral é baixa, em especial no lado oeste do estado.</description>
     </item>
     
     <item>
       <title>Roam - Açude Velho</title>
-      <link>/post/lab2-visudedados-roam/</link>
+      <link>/portfolio/post/lab2-visudedados-roam/</link>
       <pubDate>Sun, 10 Dec 2017 13:51:32 -0300</pubDate>
       
-      <guid>/post/lab2-visudedados-roam/</guid>
+      <guid>/portfolio/post/lab2-visudedados-roam/</guid>
       <description>#donut-div .arc text { font: 10px sans-serif; text-anchor: middle; } #donut-div .arc path { stroke: #fff; } #donut-div polyline { opacity: .3; stroke: black; stroke-width: 2px; fill: none; }   #bar-div .axis .domain { display: none; }   #line-div .axis--x path { display: none; } #line-div .line { fill: none; stroke: steelblue; stroke-width: 1.5px; }   Na cidade onde nasci, Campina Grande - PB, um dos pontos turísticos mais movimentado é o Açude Velho.</description>
     </item>
     
     <item>
       <title>Analise sobre boqueirão utilizando d3</title>
-      <link>/post/lab2-visudedados/</link>
+      <link>/portfolio/post/lab2-visudedados/</link>
       <pubDate>Wed, 15 Nov 2017 16:37:49 -0300</pubDate>
       
-      <guid>/post/lab2-visudedados/</guid>
+      <guid>/portfolio/post/lab2-visudedados/</guid>
       <description>Boqueirão Lab 2    Dados de Boqueirão     .mychart circle:hover { fill: rgb(194, 72, 123); } .mychart text { font: 12px sans-serif; text-anchor: left; color: black; }  &#34;use strict&#34; function desenhaBarras(dados) { var alturaSVG = 400, larguraSVG = 650; var margin = { top: 10, right: 20, bottom: 30, left: 45 }, larguraVis = larguraSVG - margin.left - margin.right, alturaVis = alturaSVG - margin.</description>
     </item>
     
     <item>
       <title>Três visualizações sobre Boqueirão</title>
-      <link>/post/lab1-visudedados/</link>
+      <link>/portfolio/post/lab1-visudedados/</link>
       <pubDate>Wed, 15 Nov 2017 16:37:49 -0300</pubDate>
       
-      <guid>/post/lab1-visudedados/</guid>
+      <guid>/portfolio/post/lab1-visudedados/</guid>
       <description>Vamos analisar o comportamento do açude de Boqueirão com o uso de 3 visualizações, usando os dados do monitoramento da INSA e com auxilia da ferramenta Vega-lite.
 Começarei analisando o volume máximo e mínimo dos anos no reservátorio de Boqueirão, pode ser uma forma interessante de descobrir como o volume do açude se comporta durante o ano.
      const spec1 = { &#34;$schema&#34;: &#34;https://vega.github.io/schema/vega-lite/v2.json&#34;, &#34;description&#34;: &#34;Análise dos volumes máximos e mínimos do reservatório ao longo dos anos.</description>
@@ -107,10 +107,10 @@ Começarei analisando o volume máximo e mínimo dos anos no reservátorio de Bo
     
     <item>
       <title></title>
-      <link>/post/labgrafos/</link>
+      <link>/portfolio/post/labgrafos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/post/labgrafos/</guid>
+      <guid>/portfolio/post/labgrafos/</guid>
       <description>Redes - Artistas Spotify  Aqui vamos analisar os nós (pontos vermelhos) que estão a um grau de distância do artista Hiroyuki Sawano (ponto verde piscina) e a popularidade dos mesmos. Ao passar o mouse sobre um nó é possível visualizar o nome do artista que ele representa.      O tamanho de cada ponto indica a popularidade do artista, quanto maior o nó, mais popular o artista é.</description>
     </item>
     

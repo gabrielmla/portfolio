@@ -30,7 +30,7 @@ series &lt;- dados %&gt;% group_by(series_name) %&gt;%
   labs(&#39;Série mais bem avaliada IMDB&#39;, x = &#39;Série&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
 
 boxplot.user_ratings</code></pre>
-<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/portfoliopost/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Considero a série mais bem avaliada como sendo a com maior mediana. Então temos a série <em>Black Mirror</em> com mediana = <strong>8.3</strong> e a série <em>Mr Robot</em> com mediana = <strong>8.8</strong>. A diferença não é grande, chegando a maior diferença de <strong>0.6</strong> entre a mediana da 2ª temporada de ambas as séries. Algo interessante é que na 2 temporada de <em>Black Mirror</em> temos tanto o episódio mais bem avaliado quanto o episódio pior avaliado, sendo o episódio <em>White Christmas</em> com nota <strong>9.1</strong> e o eposódio <em>The Waldo Moment</em> com nota <strong>7.0</strong>.</p>
 </div>
 <div id="qual-das-series-que-voce-escolheu-tem-episodios-de-qualidade-mais-irregular-segundo-o-imdb-a-diferenca-e-grande-pequena" class="section level4">
@@ -43,7 +43,7 @@ boxplot.user_ratings</code></pre>
   labs(&#39;Série mais bem avaliada IMDB&#39;, x = &#39;Episódio&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
 
 line.user_ratings</code></pre>
-<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/portfoliopost/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Podemos ver que <em>Mr Robot</em> não possui uma variação muito notável nas notas de seus episódios, já em <em>Black Mirror</em> é possível notar que a 2ª e 3ª temporada possuem um episódio, em cada, que tem uma qualidade bem mais inferior que o restante dos episódios. Inclusive, temos na 2ª temporada o episódio pior avaliado e em seguida temos o melhor avaliado da série, com uma diferença de aproximadamente <strong>2.0</strong>(<em>The Waldo Moment</em> tem uma nota 22% menor que a nota do episódio <em>White Christmas</em>.</p>
 <p>Assim, <em>Black Mirror</em> tem uma qualidade mais irregular de episódios. Como assisto a série, posso dizer que isso se aplica devido ao fato que os episódios da série são independentes, ou seja, cada um tem a sua história com ínicio, meio e fim. Assim alguns roteiros se destacam muito mais em relação a outros, nem sempre a série consegue manter um nível muito alto, como em <strong>White Christmas</strong> (meu episódio favorito da série).</p>
 <hr />
@@ -61,7 +61,7 @@ line.user_ratings</code></pre>
   labs(&#39;Episódio mais odiado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas 1&#39;, color = &#39;Série&#39;)
 
 odiado.r1</code></pre>
-<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/portfoliopost/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <pre class="r"><code>amado.r10 &lt;- dados %&gt;%
   ggplot(aes(x = season_ep, y = r10, color = series_name)) +
   geom_point() +
@@ -71,7 +71,7 @@ odiado.r1</code></pre>
   labs(&#39;Episódio mais amado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas entre 10&#39;, color = &#39;Série&#39;)
 
 amado.r10</code></pre>
-<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/portfoliopost/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Podemos ver os como se comportam a proporções de episódios mais amados e mais odiados nas séries. <em>Mr Robot</em> tem uma correlação muito baixa, os episódios da série tendem a manter um nível que agrada os fãs de forma geral. Diferente de <em>Black Mirror</em> que tem uma variação maior, porém possui menos episódios para uma melhor análise.</p>
 <pre class="r"><code>meh.r5 &lt;- dados %&gt;%
   ggplot(aes(x = season_ep, y = r5, color = series_name)) +
@@ -81,7 +81,7 @@ amado.r10</code></pre>
   scale_x_continuous(breaks = 1:12)
 
 meh.r5</code></pre>
-<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/portfoliopost/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code>dados &lt;- dados %&gt;% mutate(meh = r4 + r5 + r6) # meh = soma das proporções entre r4, r5 e r6
 
 meh.bar &lt;- dados %&gt;%
@@ -92,7 +92,7 @@ meh.bar &lt;- dados %&gt;%
   labs(&#39;Episódio mais sem graça&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas entre 4-6&#39;, fill = &#39;Temporada&#39;)
 
 meh.bar</code></pre>
-<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/portfoliopost/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Condiderei um episódio sem graça (<em>meh</em>) aquele que possui a maior proporção de notas entre 4 e 6. Descobrimos aqui que o 2° episódio da 2ª temporada de <em>Black Mirror</em> é o episódio mais sem graça das duas séries. Foi algo inexperado para mim, pensei que o episódio pior avaliado (o 3º episódio da 2ª temporada) teria uma proporção de ‘meh’ maior do que os outros, porém a proporção de ‘meh’ dele está bem parecida com a de outros episódios. Por outro lado temos o episódio mais bem avaliado de <em>Black Mirror</em> com menor ‘meh’ da série.</p>
 </div>
 <div id="episodios-no-iniciofim-da-temporada-sao-mais-bem-avaliados-que-os-no-meio-o-que-tende-a-ser-melhor-inicios-ou-finais-de-seriestemporadas" class="section level4">
@@ -128,7 +128,7 @@ dados.ggplot &lt;- dados.inicio.fim %&gt;%
     labs(&#39;Pilot x Season Finale&#39;, x = &#39;Pilot(0) x Season Finale(1)&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
 
 dados.ggplot</code></pre>
-<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/portfoliopost/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Na série <em>Black Mirror</em> o início da temporada tende a ser pior que o final da temporada. Já para <em>Mr Robot</em> temos que a primeira temporada tem um início melhor que o seu final.</p>
 </div>
 </div>
