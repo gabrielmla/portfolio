@@ -31,7 +31,7 @@ output: html_document
   labs(&#39;Episódio mais odiado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas 1&#39;, color = &#39;Série&#39;)
 
 n_episodes.popularity</code></pre>
-<p><img src="/portfoliopost/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/portfolio/post/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <pre class="r"><code>series &lt;- dados %&gt;% group_by(series_name) %&gt;%
   summarise(n = n(), popularity = sum(user_votes) / n)
 series</code></pre>
@@ -81,7 +81,7 @@ dados.inicio.fim &lt;- rbind.data.frame(inicio.geral, fim.geral)</code></pre>
     labs(&#39;Pilot x Season Finale&#39;, x = &#39;Pilot(0) x Season Finale(1)&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
 
 dados.ggplot.odiado</code></pre>
-<p><img src="/portfoliopost/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/portfolio/post/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Analisando a primeira linha (com a primeira temporada de cada série) podemos ver que nas três séries o season finale foi mais odiado que o pilot. Na segunda temporada temos duas séries, <em>13 Reasons Why</em> possui apenas uma temporada até o momento, aqui temos o que o pilot foi mais odiado que o season finale, no baso de black mirror também podemos notar que a proporção de <strong>r1</strong> foi muito baixa (menos de 1% dos usuários deram nota 1 para tanto o pilot como o season finale). Na terceira temporada temos apenas a série <em>Black Mirror</em>, e aqui temos novamente que o pilot foi mais odiado que o season finale.</p>
 </div>
 <div id="amei-s2" class="section level4">
@@ -95,7 +95,7 @@ dados.ggplot.odiado</code></pre>
     labs(&#39;Pilot x Season Finale&#39;, x = &#39;Pilot(0) x Season Finale(1)&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
 
 dados.ggplot.amado</code></pre>
-<p><img src="/portfoliopost/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/portfolio/post/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Aqui na análise dos episódios (pilot e season finale) amados temos na primeira linha 3 casos diferentes. Para <em>13 Reasons Why</em> o season finale foi muito mais amado que o pilot (70% dos usuários votaram 10 para o season finale, contra apenas 30% para o pilot); em <em>Black Mirror</em> temos o pilot mais amado que o season finale, porém uma diferença de ‘amor’ menor que em <em>13 Reasons Why</em>; por fim em <em>Mr Robot</em> temos que o pilot e o season finale possuem uma mesma proporção de amor de 60%. Para segunda temporada de <em>Black Mirror</em> e <em>Mr Robot</em> temos que o season finale foi mais amado que o pilot em ambas as séries; para a terceira temporada (apenas com Black Mirror) temos que o pilot foi mais amado que o season finale.</p>
 </div>
 </div>
@@ -115,7 +115,7 @@ dados.ggplot.amado</code></pre>
   labs(&#39;Episódio mais odiado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas 1&#39;, color = &#39;Série&#39;)
 
 uservotes.r1</code></pre>
-<p><img src="/portfoliopost/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/portfolio/post/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code>reasonswhy &lt;- dados %&gt;% filter(series_name == &#39;13 Reasons Why&#39;)
 cor(reasonswhy$r1, reasonswhy$user_votes)</code></pre>
 <pre><code>## [1] -0.6234568</code></pre>
@@ -137,7 +137,7 @@ cor(mrrobot$r1, mrrobot$user_votes)</code></pre>
   labs(&#39;Episódio mais odiado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas 1&#39;, color = &#39;Série&#39;)
 
 uservotes.r10</code></pre>
-<p><img src="/portfoliopost/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/portfolio/post/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <pre class="r"><code>reasonswhy &lt;- dados %&gt;% filter(series_name == &#39;13 Reasons Why&#39;)
 cor(reasonswhy$r10, reasonswhy$user_votes)</code></pre>
 <pre><code>## [1] 0.5556261</code></pre>
@@ -165,7 +165,7 @@ cor(mrrobot$r10, mrrobot$user_votes)</code></pre>
   labs(&#39;Episódio mais odiado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas 1&#39;, color = &#39;Série&#39;)
 
 uservotes.userrating</code></pre>
-<p><img src="/portfoliopost/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/portfolio/post/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre class="r"><code>reasonswhy &lt;- dados %&gt;% filter(series_name == &#39;13 Reasons Why&#39;)
 cor(reasonswhy$user_rating, reasonswhy$user_votes)</code></pre>
 <pre><code>## [1] 0.5035484</code></pre>
