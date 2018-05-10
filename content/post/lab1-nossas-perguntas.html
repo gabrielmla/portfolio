@@ -1,0 +1,134 @@
+---
+title: "Lab 1 - Checkpoint 1 - Nossas Perguntas"
+author: "Gabriel Morais Lúcio de Araújo"
+date: 2018-04-23
+categories: ["R"]
+tags: ["R Markdown", "plot"]
+output: html_document
+---
+
+
+
+<pre class="r"><code>dados = read_csv(here(&quot;content/dados/series_from_imdb.csv&quot;), 
+                    progress = FALSE,
+                    col_types = cols(.default = col_double(), 
+                                     series_name = col_character(), 
+                                     episode = col_character(), 
+                                     url = col_character(),
+                                     season = col_character())) %&gt;% filter(series_name %in% c(&quot;Black Mirror&quot;, &quot;Mr Robot&quot;))
+
+series &lt;- dados %&gt;% group_by(series_name) %&gt;%
+  summarise(n = n()) </code></pre>
+<hr />
+<div id="qual-das-series-que-voce-escolheu-e-mais-bem-avaliada-no-imdb-a-diferenca-e-grande-pequena-muda-de-acordo-com-as-temporadas-da-serie" class="section level4">
+<h4>Qual das séries que você escolheu é mais bem avaliada no IMDB? A diferença é grande? Pequena? Muda de acordo com as temporadas da série?</h4>
+<pre class="r"><code>boxplot.user_ratings &lt;- dados %&gt;%
+  ggplot(aes(x = &quot;&quot;, y = user_rating)) +
+  geom_boxplot(width = .4, outlier.color = NA) +
+  facet_wrap(~ series_name) +
+  geom_jitter(width = .1, size = 2, alpha = .5, aes(color = season)) +
+  labs(&#39;Série mais bem avaliada IMDB&#39;, x = &#39;Série&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
+
+boxplot.user_ratings</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Considero a série mais bem avaliada como sendo a com maior mediana. Então temos a série <em>Black Mirror</em> com mediana = <strong>8.3</strong> e a série <em>Mr Robot</em> com mediana = <strong>8.8</strong>. A diferença não é grande, chegando a maior diferença de <strong>0.6</strong> entre a mediana da 2ª temporada de ambas as séries. Algo interessante é que na 2 temporada de <em>Black Mirror</em> temos tanto o episódio mais bem avaliado quanto o episódio pior avaliado, sendo o episódio <em>White Christmas</em> com nota <strong>9.1</strong> e o eposódio <em>The Waldo Moment</em> com nota <strong>7.0</strong>.</p>
+</div>
+<div id="qual-das-series-que-voce-escolheu-tem-episodios-de-qualidade-mais-irregular-segundo-o-imdb-a-diferenca-e-grande-pequena" class="section level4">
+<h4>Qual das séries que você escolheu tem episódios de qualidade mais irregular segundo o IMDB? A diferença é grande? Pequena?</h4>
+<pre class="r"><code>line.user_ratings &lt;- dados %&gt;%
+  ggplot(aes(x = season_ep, y = user_rating, color = season, group = season)) + 
+  geom_line() + 
+  geom_point() +
+  facet_wrap(~ series_name) +
+  labs(&#39;Série mais bem avaliada IMDB&#39;, x = &#39;Episódio&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
+
+line.user_ratings</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Podemos ver que <em>Mr Robot</em> não possui uma variação muito notável nas notas de seus episódios, já em <em>Black Mirror</em> é possível notar que a 2ª e 3ª temporada possuem um episódio, em cada, que tem uma qualidade bem mais inferior que o restante dos episódios. Inclusive, temos na 2ª temporada o episódio pior avaliado e em seguida temos o melhor avaliado da série, com uma diferença de aproximadamente <strong>2.0</strong>(<em>The Waldo Moment</em> tem uma nota 22% menor que a nota do episódio <em>White Christmas</em>.</p>
+<p>Assim, <em>Black Mirror</em> tem uma qualidade mais irregular de episódios. Como assisto a série, posso dizer que isso se aplica devido ao fato que os episódios da série são independentes, ou seja, cada um tem a sua história com ínicio, meio e fim. Assim alguns roteiros se destacam muito mais em relação a outros, nem sempre a série consegue manter um nível muito alto, como em <strong>White Christmas</strong> (meu episódio favorito da série).</p>
+<hr />
+</div>
+<div id="extras" class="section level3">
+<h3>Extras</h3>
+<div id="qual-das-series-ou-temporadas-tem-episodios-mais-sem-graca-um-episodio-e-sem-graca-se-ninguem-nem-ama-nem-odeia-ele" class="section level4">
+<h4>Qual das séries ou temporadas tem episódios mais sem graça? (Um episódio é sem graça se ninguém nem ama nem odeia ele)</h4>
+<pre class="r"><code>odiado.r1 &lt;- dados %&gt;% 
+  ggplot(aes(x = season_ep, y = r1, color = series_name)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  facet_grid(series_name ~ season) +
+  scale_x_continuous(breaks = 1:12) +
+  labs(&#39;Episódio mais odiado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas 1&#39;, color = &#39;Série&#39;)
+
+odiado.r1</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>amado.r10 &lt;- dados %&gt;%
+  ggplot(aes(x = season_ep, y = r10, color = series_name)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  facet_grid(series_name ~ season) +
+  scale_x_continuous(breaks = 1:12) +
+  labs(&#39;Episódio mais amado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas entre 10&#39;, color = &#39;Série&#39;)
+
+amado.r10</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Podemos ver os como se comportam a proporções de episódios mais amados e mais odiados nas séries. <em>Mr Robot</em> tem uma correlação muito baixa, os episódios da série tendem a manter um nível que agrada os fãs de forma geral. Diferente de <em>Black Mirror</em> que tem uma variação maior, porém possui menos episódios para uma melhor análise.</p>
+<pre class="r"><code>meh.r5 &lt;- dados %&gt;%
+  ggplot(aes(x = season_ep, y = r5, color = series_name)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  facet_grid(series_name ~ season) +
+  scale_x_continuous(breaks = 1:12)
+
+meh.r5</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>dados &lt;- dados %&gt;% mutate(meh = r4 + r5 + r6) # meh = soma das proporções entre r4, r5 e r6
+
+meh.bar &lt;- dados %&gt;%
+  ggplot(aes(x = season_ep, y = meh, fill = meh)) +
+  geom_bar(stat=&quot;identity&quot;) +
+  facet_grid(series_name ~ season) +
+  scale_x_continuous(breaks = 1:12) +
+  labs(&#39;Episódio mais sem graça&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas entre 4-6&#39;, fill = &#39;Temporada&#39;)
+
+meh.bar</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Condiderei um episódio sem graça (<em>meh</em>) aquele que possui a maior proporção de notas entre 4 e 6. Descobrimos aqui que o 2° episódio da 2ª temporada de <em>Black Mirror</em> é o episódio mais sem graça das duas séries. Foi algo inexperado para mim, pensei que o episódio pior avaliado (o 3º episódio da 2ª temporada) teria uma proporção de ‘meh’ maior do que os outros, porém a proporção de ‘meh’ dele está bem parecida com a de outros episódios. Por outro lado temos o episódio mais bem avaliado de <em>Black Mirror</em> com menor ‘meh’ da série.</p>
+</div>
+<div id="episodios-no-iniciofim-da-temporada-sao-mais-bem-avaliados-que-os-no-meio-o-que-tende-a-ser-melhor-inicios-ou-finais-de-seriestemporadas" class="section level4">
+<h4>Episódios no início/fim da temporada são mais bem avaliados que os no meio? O que tende a ser melhor? Inícios ou finais de séries/temporadas?</h4>
+<pre class="r"><code>inicio.geral &lt;- dados %&gt;% 
+    group_by(series_name) %&gt;%
+    filter(season_ep == 1)
+inicio.geral$tipo &lt;- rep(0,nrow(inicio.geral))
+
+fim.mrrobot.1 &lt;- dados %&gt;%
+    filter(season_ep == 10, season == 1, series_name == &#39;Mr Robot&#39;)
+fim.mrrobot.2 &lt;- dados %&gt;%
+    filter(season_ep == 10, season == 2, series_name == &#39;Mr Robot&#39;)
+
+fim.blackmirror.1 &lt;- dados %&gt;%
+    filter(season_ep == 3, season == 1, series_name == &#39;Black Mirror&#39;)
+fim.blackmirror.2 &lt;- dados %&gt;%
+    filter(season_ep == 4, season == 2, series_name == &#39;Black Mirror&#39;)
+fim.blackmirror.3 &lt;- dados %&gt;%
+    filter(season_ep == 6, season == 3, series_name == &#39;Black Mirror&#39;)
+
+fim.geral &lt;- rbind(fim.blackmirror.1, fim.blackmirror.2, fim.blackmirror.3, fim.mrrobot.1, fim.mrrobot.2)
+fim.geral$tipo &lt;- rep(1,nrow(fim.geral))
+
+dados.inicio.fim &lt;- rbind.data.frame(inicio.geral, fim.geral)
+
+dados.ggplot &lt;- dados.inicio.fim %&gt;%
+    ggplot(aes(x = tipo, y = user_rating, color = season)) + 
+    geom_line() + 
+    geom_point() +
+    facet_wrap(~ series_name) +
+    scale_x_continuous(breaks = 0:1) +
+    labs(&#39;Pilot x Season Finale&#39;, x = &#39;Pilot(0) x Season Finale(1)&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
+
+dados.ggplot</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Na série <em>Black Mirror</em> o início da temporada tende a ser pior que o final da temporada. Já para <em>Mr Robot</em> temos que a primeira temporada tem um início melhor que o seu final.</p>
+</div>
+</div>

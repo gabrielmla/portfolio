@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R Markdown on GABRIEL M.</title>
+    <link>/tags/r-markdown/</link>
+    <description>Recent content in R Markdown on GABRIEL M.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.</copyright>
+    <lastBuildDate>Mon, 30 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lab 1 - Checkpoint 2 - Minhas perguntas</title>
+      <link>/post/lab1-minhas-perguntas/</link>
+      <pubDate>Mon, 30 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/lab1-minhas-perguntas/</guid>
+      <description>Sobre os dados Esta análise foi realizada utilizando dados sobre avaliações de episódios de séries presentes no IMDB até julho de 2017, nesse relátorio se encontram análises para as séries Black Mirror, Mr Robot e 13 Reasons Why. Mais informações sobre esses dados podem ser encontradas neste repositório.
+dados = read_csv(here(&amp;quot;content/dados/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) %&amp;gt;% filter(series_name %in% c(&amp;quot;Black Mirror&amp;quot;, &amp;quot;Mr Robot&amp;quot;, &amp;quot;13 Reasons Why&amp;quot;))  Quanto maior o número de episódios, mais popular a série?</description>
+    </item>
+    
+    <item>
+      <title>Lab 1 - Checkpoint 1 - Nossas Perguntas</title>
+      <link>/post/lab1-nossas-perguntas/</link>
+      <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/lab1-nossas-perguntas/</guid>
+      <description>dados = read_csv(here(&amp;quot;content/dados/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) %&amp;gt;% filter(series_name %in% c(&amp;quot;Black Mirror&amp;quot;, &amp;quot;Mr Robot&amp;quot;)) series &amp;lt;- dados %&amp;gt;% group_by(series_name) %&amp;gt;% summarise(n = n())  Qual das séries que você escolheu é mais bem avaliada no IMDB? A diferença é grande? Pequena? Muda de acordo com as temporadas da série? boxplot.user_ratings &amp;lt;- dados %&amp;gt;% ggplot(aes(x = &amp;quot;&amp;quot;, y = user_rating)) + geom_boxplot(width = .</description>
+    </item>
+    
+  </channel>
+</rss>

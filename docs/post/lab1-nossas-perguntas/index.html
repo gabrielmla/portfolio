@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Lab 1 - Checkpoint 1 - Nossas Perguntas</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="Gabriel Morais Lúcio de Araújo" />
+  <meta name="description" content="dados = read_csv(here(&amp;quot;content/dados/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) %&amp;gt;% filter(series_name %in% c(&amp;quot;Black Mirror&amp;quot;, &amp;quot;Mr Robot&amp;quot;)) series &amp;lt;- dados %&amp;gt;% group_by(series_name) %&amp;gt;% summarise(n = n())  Qual das séries que você escolheu é mais bem avaliada no IMDB? A diferença é grande? Pequena? Muda de acordo com as temporadas da série? boxplot.user_ratings &amp;lt;- dados %&amp;gt;% ggplot(aes(x = &amp;quot;&amp;quot;, y = user_rating)) &#43; geom_boxplot(width = ." />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Lab 1 - Checkpoint 1 - Nossas Perguntas" />
+    <meta name="twitter:description" content="dados = read_csv(here(&amp;quot;content/dados/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) %&amp;gt;% filter(series_name %in% c(&amp;quot;Black Mirror&amp;quot;, &amp;quot;Mr Robot&amp;quot;)) series &amp;lt;- dados %&amp;gt;% group_by(series_name) %&amp;gt;% summarise(n = n())  Qual das séries que você escolheu é mais bem avaliada no IMDB? A diferença é grande? Pequena? Muda de acordo com as temporadas da série? boxplot.user_ratings &amp;lt;- dados %&amp;gt;% ggplot(aes(x = &amp;quot;&amp;quot;, y = user_rating)) &#43; geom_boxplot(width = ." />
+    <meta name="twitter:image" content="/img/avatar.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.40.2" />
+
+
+<link rel="canonical" href="/post/lab1-nossas-perguntas/" />
+<link rel="alternative" href="/index.xml" title="GABRIEL M." type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc" />
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587" />
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="GABRIEL M." />
+<meta name="msapplication-tooltip" content="GABRIEL M." />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">GABRIEL M.</h2>
+  
+  <p class="subtitle">Ready to be shot into space.</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item  is-active"><a href="/">Home</a></li>
+      
+        <li class="menu-item "><a href="https://github.com/gabrielmla">Works</a></li>
+      
+        <li class="menu-item "><a href="/about/">About</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:gabmla19@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/gabrielmla" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Lab 1 - Checkpoint 1 - Nossas Perguntas</h1>
+      <p class="post-meta">@Gabriel Morais Lúcio de Araújo · Apr 23, 2018 · 5 min read</p>
+    </header>
+    <article class="post-content"><pre class="r"><code>dados = read_csv(here(&quot;content/dados/series_from_imdb.csv&quot;), 
+                    progress = FALSE,
+                    col_types = cols(.default = col_double(), 
+                                     series_name = col_character(), 
+                                     episode = col_character(), 
+                                     url = col_character(),
+                                     season = col_character())) %&gt;% filter(series_name %in% c(&quot;Black Mirror&quot;, &quot;Mr Robot&quot;))
+
+series &lt;- dados %&gt;% group_by(series_name) %&gt;%
+  summarise(n = n()) </code></pre>
+<hr />
+<div id="qual-das-series-que-voce-escolheu-e-mais-bem-avaliada-no-imdb-a-diferenca-e-grande-pequena-muda-de-acordo-com-as-temporadas-da-serie" class="section level4">
+<h4>Qual das séries que você escolheu é mais bem avaliada no IMDB? A diferença é grande? Pequena? Muda de acordo com as temporadas da série?</h4>
+<pre class="r"><code>boxplot.user_ratings &lt;- dados %&gt;%
+  ggplot(aes(x = &quot;&quot;, y = user_rating)) +
+  geom_boxplot(width = .4, outlier.color = NA) +
+  facet_wrap(~ series_name) +
+  geom_jitter(width = .1, size = 2, alpha = .5, aes(color = season)) +
+  labs(&#39;Série mais bem avaliada IMDB&#39;, x = &#39;Série&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
+
+boxplot.user_ratings</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Considero a série mais bem avaliada como sendo a com maior mediana. Então temos a série <em>Black Mirror</em> com mediana = <strong>8.3</strong> e a série <em>Mr Robot</em> com mediana = <strong>8.8</strong>. A diferença não é grande, chegando a maior diferença de <strong>0.6</strong> entre a mediana da 2ª temporada de ambas as séries. Algo interessante é que na 2 temporada de <em>Black Mirror</em> temos tanto o episódio mais bem avaliado quanto o episódio pior avaliado, sendo o episódio <em>White Christmas</em> com nota <strong>9.1</strong> e o eposódio <em>The Waldo Moment</em> com nota <strong>7.0</strong>.</p>
+</div>
+<div id="qual-das-series-que-voce-escolheu-tem-episodios-de-qualidade-mais-irregular-segundo-o-imdb-a-diferenca-e-grande-pequena" class="section level4">
+<h4>Qual das séries que você escolheu tem episódios de qualidade mais irregular segundo o IMDB? A diferença é grande? Pequena?</h4>
+<pre class="r"><code>line.user_ratings &lt;- dados %&gt;%
+  ggplot(aes(x = season_ep, y = user_rating, color = season, group = season)) + 
+  geom_line() + 
+  geom_point() +
+  facet_wrap(~ series_name) +
+  labs(&#39;Série mais bem avaliada IMDB&#39;, x = &#39;Episódio&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
+
+line.user_ratings</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Podemos ver que <em>Mr Robot</em> não possui uma variação muito notável nas notas de seus episódios, já em <em>Black Mirror</em> é possível notar que a 2ª e 3ª temporada possuem um episódio, em cada, que tem uma qualidade bem mais inferior que o restante dos episódios. Inclusive, temos na 2ª temporada o episódio pior avaliado e em seguida temos o melhor avaliado da série, com uma diferença de aproximadamente <strong>2.0</strong>(<em>The Waldo Moment</em> tem uma nota 22% menor que a nota do episódio <em>White Christmas</em>.</p>
+<p>Assim, <em>Black Mirror</em> tem uma qualidade mais irregular de episódios. Como assisto a série, posso dizer que isso se aplica devido ao fato que os episódios da série são independentes, ou seja, cada um tem a sua história com ínicio, meio e fim. Assim alguns roteiros se destacam muito mais em relação a outros, nem sempre a série consegue manter um nível muito alto, como em <strong>White Christmas</strong> (meu episódio favorito da série).</p>
+<hr />
+</div>
+<div id="extras" class="section level3">
+<h3>Extras</h3>
+<div id="qual-das-series-ou-temporadas-tem-episodios-mais-sem-graca-um-episodio-e-sem-graca-se-ninguem-nem-ama-nem-odeia-ele" class="section level4">
+<h4>Qual das séries ou temporadas tem episódios mais sem graça? (Um episódio é sem graça se ninguém nem ama nem odeia ele)</h4>
+<pre class="r"><code>odiado.r1 &lt;- dados %&gt;% 
+  ggplot(aes(x = season_ep, y = r1, color = series_name)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  facet_grid(series_name ~ season) +
+  scale_x_continuous(breaks = 1:12) +
+  labs(&#39;Episódio mais odiado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas 1&#39;, color = &#39;Série&#39;)
+
+odiado.r1</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>amado.r10 &lt;- dados %&gt;%
+  ggplot(aes(x = season_ep, y = r10, color = series_name)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  facet_grid(series_name ~ season) +
+  scale_x_continuous(breaks = 1:12) +
+  labs(&#39;Episódio mais amado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas entre 10&#39;, color = &#39;Série&#39;)
+
+amado.r10</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Podemos ver os como se comportam a proporções de episódios mais amados e mais odiados nas séries. <em>Mr Robot</em> tem uma correlação muito baixa, os episódios da série tendem a manter um nível que agrada os fãs de forma geral. Diferente de <em>Black Mirror</em> que tem uma variação maior, porém possui menos episódios para uma melhor análise.</p>
+<pre class="r"><code>meh.r5 &lt;- dados %&gt;%
+  ggplot(aes(x = season_ep, y = r5, color = series_name)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  facet_grid(series_name ~ season) +
+  scale_x_continuous(breaks = 1:12)
+
+meh.r5</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>dados &lt;- dados %&gt;% mutate(meh = r4 + r5 + r6) # meh = soma das proporções entre r4, r5 e r6
+
+meh.bar &lt;- dados %&gt;%
+  ggplot(aes(x = season_ep, y = meh, fill = meh)) +
+  geom_bar(stat=&quot;identity&quot;) +
+  facet_grid(series_name ~ season) +
+  scale_x_continuous(breaks = 1:12) +
+  labs(&#39;Episódio mais sem graça&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas entre 4-6&#39;, fill = &#39;Temporada&#39;)
+
+meh.bar</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Condiderei um episódio sem graça (<em>meh</em>) aquele que possui a maior proporção de notas entre 4 e 6. Descobrimos aqui que o 2° episódio da 2ª temporada de <em>Black Mirror</em> é o episódio mais sem graça das duas séries. Foi algo inexperado para mim, pensei que o episódio pior avaliado (o 3º episódio da 2ª temporada) teria uma proporção de ‘meh’ maior do que os outros, porém a proporção de ‘meh’ dele está bem parecida com a de outros episódios. Por outro lado temos o episódio mais bem avaliado de <em>Black Mirror</em> com menor ‘meh’ da série.</p>
+</div>
+<div id="episodios-no-iniciofim-da-temporada-sao-mais-bem-avaliados-que-os-no-meio-o-que-tende-a-ser-melhor-inicios-ou-finais-de-seriestemporadas" class="section level4">
+<h4>Episódios no início/fim da temporada são mais bem avaliados que os no meio? O que tende a ser melhor? Inícios ou finais de séries/temporadas?</h4>
+<pre class="r"><code>inicio.geral &lt;- dados %&gt;% 
+    group_by(series_name) %&gt;%
+    filter(season_ep == 1)
+inicio.geral$tipo &lt;- rep(0,nrow(inicio.geral))
+
+fim.mrrobot.1 &lt;- dados %&gt;%
+    filter(season_ep == 10, season == 1, series_name == &#39;Mr Robot&#39;)
+fim.mrrobot.2 &lt;- dados %&gt;%
+    filter(season_ep == 10, season == 2, series_name == &#39;Mr Robot&#39;)
+
+fim.blackmirror.1 &lt;- dados %&gt;%
+    filter(season_ep == 3, season == 1, series_name == &#39;Black Mirror&#39;)
+fim.blackmirror.2 &lt;- dados %&gt;%
+    filter(season_ep == 4, season == 2, series_name == &#39;Black Mirror&#39;)
+fim.blackmirror.3 &lt;- dados %&gt;%
+    filter(season_ep == 6, season == 3, series_name == &#39;Black Mirror&#39;)
+
+fim.geral &lt;- rbind(fim.blackmirror.1, fim.blackmirror.2, fim.blackmirror.3, fim.mrrobot.1, fim.mrrobot.2)
+fim.geral$tipo &lt;- rep(1,nrow(fim.geral))
+
+dados.inicio.fim &lt;- rbind.data.frame(inicio.geral, fim.geral)
+
+dados.ggplot &lt;- dados.inicio.fim %&gt;%
+    ggplot(aes(x = tipo, y = user_rating, color = season)) + 
+    geom_line() + 
+    geom_point() +
+    facet_wrap(~ series_name) +
+    scale_x_continuous(breaks = 0:1) +
+    labs(&#39;Pilot x Season Finale&#39;, x = &#39;Pilot(0) x Season Finale(1)&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
+
+dados.ggplot</code></pre>
+<p><img src="/post/lab1-nossas-perguntas_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Na série <em>Black Mirror</em> o início da temporada tende a ser pior que o final da temporada. Já para <em>Mr Robot</em> temos que a primeira temporada tem um início melhor que o seu final.</p>
+</div>
+</div>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/r-markdown"><span class="tag">R Markdown</span></a></li>
+        
+          <li><a href="/tags/plot"><span class="tag">Plot</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "gabrielmla" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 GABRIEL M.</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="/js/bundle.js"></script>
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-XXXXXXXX-X', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

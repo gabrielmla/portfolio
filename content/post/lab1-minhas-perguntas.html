@@ -1,0 +1,180 @@
+---
+title: "Lab 1 - Checkpoint 2 - Minhas perguntas"
+author: "Gabriel Morais Lúcio de Araújo"
+date: 2018-04-30
+categories: ["R"]
+tags: ["R Markdown", "plot"]
+output: html_document
+---
+
+
+
+<div id="sobre-os-dados" class="section level2">
+<h2>Sobre os dados</h2>
+<p>Esta análise foi realizada utilizando dados sobre avaliações de episódios de séries presentes no IMDB até julho de 2017, nesse relátorio se encontram análises para as séries <em>Black Mirror</em>, <em>Mr Robot</em> e <em>13 Reasons Why</em>. Mais informações sobre esses dados podem ser encontradas <a href="https://github.com/nazareno/imdb-series">neste</a> repositório.</p>
+<pre class="r"><code>dados = read_csv(here(&quot;content/dados/series_from_imdb.csv&quot;), 
+                    progress = FALSE,
+                    col_types = cols(.default = col_double(), 
+                                     series_name = col_character(), 
+                                     episode = col_character(), 
+                                     url = col_character(),
+                                     season = col_character())) %&gt;% filter(series_name %in% c(&quot;Black Mirror&quot;, &quot;Mr Robot&quot;, &quot;13 Reasons Why&quot;))</code></pre>
+</div>
+<div id="quanto-maior-o-numero-de-episodios-mais-popular-a-serie" class="section level2">
+<h2>Quanto maior o número de episódios, mais popular a série?</h2>
+<pre class="r"><code>n_episodes.popularity &lt;- dados %&gt;%
+  
+  ggplot(aes(x = season_ep, y = user_votes, fill = series_name)) +
+  geom_area() +
+  facet_grid(season ~ series_name) +
+  scale_x_continuous(breaks = 1:13) +
+  labs(&#39;Episódio mais odiado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas 1&#39;, color = &#39;Série&#39;)
+
+n_episodes.popularity</code></pre>
+<p><img src="/post/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>series &lt;- dados %&gt;% group_by(series_name) %&gt;%
+  summarise(n = n(), popularity = sum(user_votes) / n)
+series</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   series_name        n popularity
+##   &lt;chr&gt;          &lt;int&gt;      &lt;dbl&gt;
+## 1 13 Reasons Why    13      2889.
+## 2 Black Mirror      13     12520.
+## 3 Mr Robot          22      4469.</code></pre>
+<p>Aqui utilizei um grafíco de linhas, onde x é um episódio (váriavel <code>season_ep</code> nos dados) e y é a quantidade de votos (váriavel <code>user_votes</code> nos dados) desse episódio. Antes de realizar a análise, eu imaginei que quanto maior o número de episódios mais popular a série, porém aqui vi que isso não é o que ocorre. Como pode-se ver, a série <em>Black Mirror</em> possui 3 episódios na 1ª temporada, 4 na 2ª temporada e 6 na 3ª temporada (totalizando 13 episódios), e é a série mais popular, em todas as temporadas. Na tabela abaixo do gráfico podemos ver que a popularidade média de cada episódio de <em>Black Mirror</em> é 12519, quase <strong>3x maior</strong> que a média dos episódios de Mr Robot que fica com 4469.</p>
+</div>
+<div id="inicios-e-finais-de-temporadas-sao-mais-amados-ou-mais-odiados" class="section level2">
+<h2>Inícios e finais de temporadas são mais amados ou mais odiados?</h2>
+<pre class="r"><code>inicio.geral &lt;- dados %&gt;% 
+    group_by(series_name) %&gt;%
+    filter(season_ep == 1)
+inicio.geral$tipo &lt;- rep(0,nrow(inicio.geral))
+
+fim.13reasons &lt;- dados %&gt;%
+    filter(season_ep == 13, season == 1, series_name == &#39;13 Reasons Why&#39;)
+
+fim.mrrobot.1 &lt;- dados %&gt;%
+    filter(season_ep == 10, season == 1, series_name == &#39;Mr Robot&#39;)
+fim.mrrobot.2 &lt;- dados %&gt;%
+    filter(season_ep == 12, season == 2, series_name == &#39;Mr Robot&#39;)
+
+fim.blackmirror.1 &lt;- dados %&gt;%
+    filter(season_ep == 3, season == 1, series_name == &#39;Black Mirror&#39;)
+fim.blackmirror.2 &lt;- dados %&gt;%
+    filter(season_ep == 4, season == 2, series_name == &#39;Black Mirror&#39;)
+fim.blackmirror.3 &lt;- dados %&gt;%
+    filter(season_ep == 6, season == 3, series_name == &#39;Black Mirror&#39;)
+
+fim.geral &lt;- rbind(fim.blackmirror.1, fim.blackmirror.2, fim.blackmirror.3, fim.mrrobot.1, fim.mrrobot.2, fim.13reasons)
+fim.geral$tipo &lt;- rep(1,nrow(fim.geral))
+
+dados.inicio.fim &lt;- rbind.data.frame(inicio.geral, fim.geral)</code></pre>
+<p>Essa pergunta será respondida da seguinte forma: serão plotados gráficos de linha, onde o primeiro ponto é o 1º episódio da temporada (pilot) e o segundo ponto é o último episódio da temporada (finale). Para julgar um episódio como odiado ou amado utilizei as váriaves <code>r1</code> (proporção de usuários que votaram 1 estrela) e <code>r10</code> (proporção de usuários que votaram 10 estrelas), respectivamente.</p>
+<div id="odiei-grr" class="section level4">
+<h4>Odiei <strong>grr</strong></h4>
+<pre class="r"><code>dados.ggplot.odiado &lt;- dados.inicio.fim %&gt;%
+    ggplot(aes(x = tipo, y = r1, color = season)) + 
+    geom_line() + 
+    geom_point() +
+    facet_grid(season ~ series_name) +
+    scale_x_continuous(breaks = 0:1) +
+    labs(&#39;Pilot x Season Finale&#39;, x = &#39;Pilot(0) x Season Finale(1)&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
+
+dados.ggplot.odiado</code></pre>
+<p><img src="/post/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Analisando a primeira linha (com a primeira temporada de cada série) podemos ver que nas três séries o season finale foi mais odiado que o pilot. Na segunda temporada temos duas séries, <em>13 Reasons Why</em> possui apenas uma temporada até o momento, aqui temos o que o pilot foi mais odiado que o season finale, no baso de black mirror também podemos notar que a proporção de <strong>r1</strong> foi muito baixa (menos de 1% dos usuários deram nota 1 para tanto o pilot como o season finale). Na terceira temporada temos apenas a série <em>Black Mirror</em>, e aqui temos novamente que o pilot foi mais odiado que o season finale.</p>
+</div>
+<div id="amei-s2" class="section level4">
+<h4>Amei <strong>s2</strong></h4>
+<pre class="r"><code>dados.ggplot.amado &lt;- dados.inicio.fim %&gt;%
+    ggplot(aes(x = tipo, y = r10, color = season)) + 
+    geom_line() + 
+    geom_point() +
+    facet_grid(season ~ series_name) +
+    scale_x_continuous(breaks = 0:1) +
+    labs(&#39;Pilot x Season Finale&#39;, x = &#39;Pilot(0) x Season Finale(1)&#39;, y = &#39;Notas de Usuário&#39;, color = &#39;Temporada&#39;)
+
+dados.ggplot.amado</code></pre>
+<p><img src="/post/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Aqui na análise dos episódios (pilot e season finale) amados temos na primeira linha 3 casos diferentes. Para <em>13 Reasons Why</em> o season finale foi muito mais amado que o pilot (70% dos usuários votaram 10 para o season finale, contra apenas 30% para o pilot); em <em>Black Mirror</em> temos o pilot mais amado que o season finale, porém uma diferença de ‘amor’ menor que em <em>13 Reasons Why</em>; por fim em <em>Mr Robot</em> temos que o pilot e o season finale possuem uma mesma proporção de amor de 60%. Para segunda temporada de <em>Black Mirror</em> e <em>Mr Robot</em> temos que o season finale foi mais amado que o pilot em ambas as séries; para a terceira temporada (apenas com Black Mirror) temos que o pilot foi mais amado que o season finale.</p>
+</div>
+</div>
+<div id="episodios-que-recebem-mais-votos-de-usuarios-sao-amados-ou-odiados" class="section level2">
+<h2>Episódios que recebem mais votos de usuários são amados ou odiados?</h2>
+<p>Para respondeu esta pergunta irei analisar os episódios mais votados das séries e ver se eles estão relacionados com as notas e se são amados ou não.</p>
+<div id="amor-e-odio" class="section level4">
+<h4>Amor e Ódio</h4>
+<pre class="r"><code>uservotes.r1 &lt;- dados %&gt;% 
+  ggplot(aes(x = r1, y = user_votes, color = series_name)) +
+  geom_point() +
+  geom_smooth(method = lm, aes(color = &#39;blue&#39;)) +
+  facet_wrap(~ series_name) +
+  scale_color_discrete(name=&quot;Série&quot;,
+                       breaks=c(&quot;13 Reasons Why&quot;, &quot;Black Mirror&quot;, &quot;Mr Robot&quot;),
+                       labels=c(&quot;13 Reasons Why&quot;, &quot;Black Mirror&quot;, &quot;Mr Robot&quot;)) +
+  labs(&#39;Episódio mais odiado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas 1&#39;, color = &#39;Série&#39;)
+
+uservotes.r1</code></pre>
+<p><img src="/post/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>reasonswhy &lt;- dados %&gt;% filter(series_name == &#39;13 Reasons Why&#39;)
+cor(reasonswhy$r1, reasonswhy$user_votes)</code></pre>
+<pre><code>## [1] -0.6234568</code></pre>
+<pre class="r"><code>blackmirror &lt;- dados %&gt;% filter(series_name == &#39;Black Mirror&#39;)
+cor(blackmirror$r1, blackmirror$user_votes)</code></pre>
+<pre><code>## [1] 0.0963583</code></pre>
+<pre class="r"><code>mrrobot &lt;- dados %&gt;% filter(series_name == &#39;Mr Robot&#39;)
+cor(mrrobot$r1, mrrobot$user_votes)</code></pre>
+<pre><code>## [1] -0.3945964</code></pre>
+<p>Analisando o <strong>ódio</strong> (<code>r1</code>) primeiro é possível ver um comportamento estranho entre as séries escolhidas. Em <em>13 Reasons Why</em> e <em>Mr Robot</em> ambos possuem uma correlação linear negativa, quanto maior o ódio (eixo x), menor a quantidade de votos de um episódio (eixo y). Já em <em>Black Mirror</em> existe uma correlação linear positiva, porém é bem baixa , apenas <strong>0.09</strong>. E novamente os pontos de <em>13 Reasons Why</em> estão bem mais concentrados ao redor da linha de correlação do que as outras séries.</p>
+<pre class="r"><code>uservotes.r10 &lt;- dados %&gt;% 
+  ggplot(aes(x = r10, y = user_votes, color = series_name)) +
+  geom_point() +
+  geom_smooth(method = lm, aes(color = &#39;blue&#39;)) +
+  facet_wrap(~ series_name) +
+  scale_color_discrete(name=&quot;Série&quot;,
+                       breaks=c(&quot;13 Reasons Why&quot;, &quot;Black Mirror&quot;, &quot;Mr Robot&quot;),
+                       labels=c(&quot;13 Reasons Why&quot;, &quot;Black Mirror&quot;, &quot;Mr Robot&quot;)) +
+  labs(&#39;Episódio mais odiado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas 1&#39;, color = &#39;Série&#39;)
+
+uservotes.r10</code></pre>
+<p><img src="/post/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>reasonswhy &lt;- dados %&gt;% filter(series_name == &#39;13 Reasons Why&#39;)
+cor(reasonswhy$r10, reasonswhy$user_votes)</code></pre>
+<pre><code>## [1] 0.5556261</code></pre>
+<pre class="r"><code>blackmirror &lt;- dados %&gt;% filter(series_name == &#39;Black Mirror&#39;)
+cor(blackmirror$r10, blackmirror$user_votes)</code></pre>
+<pre><code>## [1] 0.1202663</code></pre>
+<pre class="r"><code>mrrobot &lt;- dados %&gt;% filter(series_name == &#39;Mr Robot&#39;)
+cor(mrrobot$r10, mrrobot$user_votes)</code></pre>
+<pre><code>## [1] 0.2029337</code></pre>
+<p>Analisando o <strong>amor</strong> (<code>r10</code>) vemos um comportamento mais esperado. Aqui as três séries possuem uma correlação linear positiva, ou seja, quanto maior o amor (eixo x), maior a qunatidade de votos (eixo y). E novamente a série <em>13 Reasons Why</em> possui a maior correlação entre as trẽs, devido aos seus dados estarem mais concentrados ao redor da linha de correlação. Aparetemente a <em>fan base</em> essa série possui uma <em>fan base</em> que a ama bastante.</p>
+</div>
+</div>
+<div id="episodios-que-recebem-mais-votos-de-usuarios-possuem-uma-melhor-avaliacao" class="section level2">
+<h2>Episódios que recebem mais votos de usuários possuem uma melhor avaliação?</h2>
+<div id="notas" class="section level4">
+<h4>Notas</h4>
+<pre class="r"><code>uservotes.userrating &lt;- dados %&gt;% 
+  ggplot(aes(x = user_rating, y = user_votes, color = series_name)) +
+  geom_point() +
+  geom_smooth(method = lm, aes(color = &#39;blue&#39;)) +
+  facet_wrap(~ series_name) +
+  scale_color_discrete(name=&quot;Série&quot;,
+                       breaks=c(&quot;13 Reasons Why&quot;, &quot;Black Mirror&quot;, &quot;Mr Robot&quot;),
+                       labels=c(&quot;13 Reasons Why&quot;, &quot;Black Mirror&quot;, &quot;Mr Robot&quot;)) +
+  labs(&#39;Episódio mais odiado&#39;, x = &#39;Episódio&#39;, y = &#39;Prop. de notas 1&#39;, color = &#39;Série&#39;)
+
+uservotes.userrating</code></pre>
+<p><img src="/post/lab1-minhas-perguntas_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>reasonswhy &lt;- dados %&gt;% filter(series_name == &#39;13 Reasons Why&#39;)
+cor(reasonswhy$user_rating, reasonswhy$user_votes)</code></pre>
+<pre><code>## [1] 0.5035484</code></pre>
+<pre class="r"><code>blackmirror &lt;- dados %&gt;% filter(series_name == &#39;Black Mirror&#39;)
+cor(blackmirror$user_rating, blackmirror$user_votes)</code></pre>
+<pre><code>## [1] 0.4876892</code></pre>
+<pre class="r"><code>mrrobot &lt;- dados %&gt;% filter(series_name == &#39;Mr Robot&#39;)
+cor(mrrobot$user_rating, mrrobot$user_votes)</code></pre>
+<pre><code>## [1] 0.2305291</code></pre>
+<p>Utizarei esse gráfico para visualizar a correlação entre o número de votos e a avalição do episódio, ou seja, ver se quanto maior a avaliação, maior a quantidade de votos. Nas três séries exite uma correlação linear positiva entre o número de votos e a avaliação do episódio. No caso de <em>Mr Robot</em> a correlação não é alta (<strong>0.23</strong>), já para <em>13 Reasons Why</em> e <em>Black Mirror</em> ela é (<strong>0.50</strong>) e (<strong>0.48</strong>), respectivamente. Em <em>13 Reasons Why</em> os pontos estão mais concetrados ao redor da linha, apesar de ser menos inclinada que em <em>Black Mirror</em>, que possui os dados mais espalhados.</p>
+</div>
+</div>
