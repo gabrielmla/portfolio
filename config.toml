@@ -6,6 +6,7 @@ enableRobotsTXT = true
 pygmentsuseclasses = true
 PygmentsCodeFences = true
 canonifyurls = true
+relativeurls = true
 publishDir = "docs"
 
 # Disqus Username
