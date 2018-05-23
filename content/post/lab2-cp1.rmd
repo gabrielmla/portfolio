@@ -1,10 +1,10 @@
 ---
 title: "Avaliação geral ao longo da série"
 author: "Gabriel Morais Lúcio de Araújo"
-date: 2018-05-22
+date: '2018-05-22'
+slug: lab2-cp1-rmd
 categories: ["R"]
 tags: ["R Markdown", "plot"]
-output: html_document
 ---
 
 ```{r setup, include=FALSE}

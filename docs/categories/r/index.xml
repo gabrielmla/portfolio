@@ -2,42 +2,42 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on GABRIEL M.</title>
-    <link>/categories/r/</link>
+    <link>https://gabrielmla.github.io/portfolio/categories/r/</link>
     <description>Recent content in R on GABRIEL M.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.</copyright>
     <lastBuildDate>Tue, 22 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gabrielmla.github.io/portfolio/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Avaliação geral ao longo da série</title>
-      <link>/post/lab2-cp1/</link>
+      <link>https://gabrielmla.github.io/portfolio/post/lab2-cp1-rmd/</link>
       <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/lab2-cp1/</guid>
+      <guid>https://gabrielmla.github.io/portfolio/post/lab2-cp1-rmd/</guid>
       <description>Sobre os dados Esta análise foi realizada utilizando dados sobre avaliações de episódios de séries presentes no IMDB até julho de 2017, nesse relátorio se encontram análises para as séries Black Mirror, e 13 Reasons Why. Mais informações sobre esses dados podem ser encontradas neste repositório.
- {&#34;x&#34;:{&#34;visdat&#34;:{&#34;494e1ca26fe3&#34;:[&#34;function () &#34;,&#34;plotlyVisDat&#34;],&#34;494e51a399c4&#34;:[&#34;function () &#34;,&#34;data&#34;],&#34;494e76e087d2&#34;:[&#34;function () &#34;,&#34;data&#34;]},&#34;cur_data&#34;:&#34;494e76e087d2&#34;,&#34;attrs&#34;:{&#34;494e1ca26fe3&#34;:{&#34;x&#34;:{},&#34;y&#34;:{},&#34;text&#34;:{},&#34;color&#34;:{},&#34;colors&#34;:[&#34;darkgoldenrod1&#34;,&#34;darkblue&#34;],&#34;alpha&#34;:0.9,&#34;sizes&#34;:[10,100],&#34;size&#34;:{},&#34;visible&#34;:&#34;legendonly&#34;,&#34;type&#34;:&#34;scatter&#34;,&#34;mode&#34;:&#34;markers&#34;},&#34;494e51a399c4&#34;:{&#34;x&#34;:{},&#34;y&#34;:{},&#34;text&#34;:{},&#34;color&#34;:{},&#34;colors&#34;:[&#34;darkgoldenrod1&#34;,&#34;darkblue&#34;],&#34;alpha&#34;:1,&#34;sizes&#34;:[10,100],&#34;type&#34;:&#34;scatter&#34;,&#34;mode&#34;:&#34;lines&#34;},&#34;494e76e087d2&#34;:{&#34;x&#34;:{},&#34;y&#34;:{},&#34;text&#34;:{},&#34;color&#34;:{},&#34;colors&#34;:[&#34;darkgoldenrod1&#34;,&#34;darkblue&#34;],&#34;alpha&#34;:1,&#34;sizes&#34;:[10,100],&#34;type&#34;:&#34;scatter&#34;,&#34;mode&#34;:&#34;lines&#34;}},&#34;layout&#34;:{&#34;margin&#34;:{&#34;b&#34;:40,&#34;l&#34;:60,&#34;t&#34;:25,&#34;r&#34;:10},&#34;title&#34;:&#34;Notas gerais de episódios ao longo da série&#34;,&#34;yaxis&#34;:{&#34;domain&#34;:[0,1],&#34;title&#34;:&#34;Avaliação geral do episódio&#34;},&#34;xaxis&#34;:{&#34;domain&#34;:[0,1],&#34;title&#34;:&#34;Número do episódio na série&#34;</description>
+ {&#34;x&#34;:{&#34;visdat&#34;:{&#34;501449509615&#34;:[&#34;function () &#34;,&#34;plotlyVisDat&#34;],&#34;50142f40eeb3&#34;:[&#34;function () &#34;,&#34;data&#34;],&#34;50147d3e1738&#34;:[&#34;function () &#34;,&#34;data&#34;]},&#34;cur_data&#34;:&#34;50147d3e1738&#34;,&#34;attrs&#34;:{&#34;501449509615&#34;:{&#34;x&#34;:{},&#34;y&#34;:{},&#34;text&#34;:{},&#34;color&#34;:{},&#34;colors&#34;:[&#34;darkgoldenrod1&#34;,&#34;darkblue&#34;],&#34;alpha&#34;:0.9,&#34;sizes&#34;:[10,100],&#34;size&#34;:{},&#34;visible&#34;:&#34;legendonly&#34;,&#34;type&#34;:&#34;scatter&#34;,&#34;mode&#34;:&#34;markers&#34;},&#34;50142f40eeb3&#34;:{&#34;x&#34;:{},&#34;y&#34;:{},&#34;text&#34;:{},&#34;color&#34;:{},&#34;colors&#34;:[&#34;darkgoldenrod1&#34;,&#34;darkblue&#34;],&#34;alpha&#34;:1,&#34;sizes&#34;:[10,100],&#34;type&#34;:&#34;scatter&#34;,&#34;mode&#34;:&#34;lines&#34;},&#34;50147d3e1738&#34;:{&#34;x&#34;:{},&#34;y&#34;:{},&#34;text&#34;:{},&#34;color&#34;:{},&#34;colors&#34;:[&#34;darkgoldenrod1&#34;,&#34;darkblue&#34;],&#34;alpha&#34;:1,&#34;sizes&#34;:[10,100],&#34;type&#34;:&#34;scatter&#34;,&#34;mode&#34;:&#34;lines&#34;}},&#34;layout&#34;:{&#34;margin&#34;:{&#34;b&#34;:40,&#34;l&#34;:60,&#34;t&#34;:25,&#34;r&#34;:10},&#34;title&#34;:&#34;Notas gerais de episódios ao longo da série&#34;,&#34;yaxis&#34;:{&#34;domain&#34;:[0,1],&#34;title&#34;:&#34;Avaliação geral do episódio&#34;},&#34;xaxis&#34;:{&#34;domain&#34;:[0,1],&#34;title&#34;:&#34;Número do episódio na série&#34;</description>
     </item>
     
     <item>
       <title>Lab 1 - Checkpoint 2 - Minhas perguntas</title>
-      <link>/post/lab1-minhas-perguntas/</link>
+      <link>https://gabrielmla.github.io/portfolio/post/lab1-minhas-perguntas/</link>
       <pubDate>Mon, 30 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/lab1-minhas-perguntas/</guid>
+      <guid>https://gabrielmla.github.io/portfolio/post/lab1-minhas-perguntas/</guid>
       <description>Sobre os dados Esta análise foi realizada utilizando dados sobre avaliações de episódios de séries presentes no IMDB até julho de 2017, nesse relátorio se encontram análises para as séries Black Mirror, Mr Robot e 13 Reasons Why. Mais informações sobre esses dados podem ser encontradas neste repositório.
 dados = read_csv(here(&amp;quot;content/dados/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) %&amp;gt;% filter(series_name %in% c(&amp;quot;Black Mirror&amp;quot;, &amp;quot;Mr Robot&amp;quot;, &amp;quot;13 Reasons Why&amp;quot;))  Quanto maior o número de episódios, mais popular a série?</description>
     </item>
     
     <item>
       <title>Lab 1 - Checkpoint 1 - Nossas Perguntas</title>
-      <link>/post/lab1-nossas-perguntas/</link>
+      <link>https://gabrielmla.github.io/portfolio/post/lab1-nossas-perguntas/</link>
       <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/lab1-nossas-perguntas/</guid>
+      <guid>https://gabrielmla.github.io/portfolio/post/lab1-nossas-perguntas/</guid>
       <description>dados = read_csv(here(&amp;quot;content/dados/series_from_imdb.csv&amp;quot;), progress = FALSE, col_types = cols(.default = col_double(), series_name = col_character(), episode = col_character(), url = col_character(), season = col_character())) %&amp;gt;% filter(series_name %in% c(&amp;quot;Black Mirror&amp;quot;, &amp;quot;Mr Robot&amp;quot;)) series &amp;lt;- dados %&amp;gt;% group_by(series_name) %&amp;gt;% summarise(n = n())  Qual das séries que você escolheu é mais bem avaliada no IMDB? A diferença é grande? Pequena? Muda de acordo com as temporadas da série? boxplot.user_ratings &amp;lt;- dados %&amp;gt;% ggplot(aes(x = &amp;quot;&amp;quot;, y = user_rating)) + geom_boxplot(width = .</description>
     </item>
     
