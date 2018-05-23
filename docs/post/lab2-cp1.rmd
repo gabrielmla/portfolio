@@ -1,0 +1,58 @@
+---
+title: "Avaliação geral ao longo da série"
+author: "Gabriel Morais Lúcio de Araújo"
+date: 2018-05-22
+categories: ["R"]
+tags: ["R Markdown", "plot"]
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(plotly)
+library(scales)
+library(readr)
+theme_set(theme_bw())
+```
+
+## Sobre os dados
+Esta análise foi realizada utilizando dados sobre avaliações de episódios de séries presentes no IMDB até julho de 2017, nesse relátorio se encontram análises para as séries *Black Mirror*, e *13 Reasons Why*. Mais informações sobre esses dados podem ser encontradas [neste](https://github.com/nazareno/imdb-series) repositório.
+
+```{r include=FALSE}
+dados = read_csv(here("content/dados/series_from_imdb.csv"), 
+                    progress = FALSE,
+                    col_types = cols(.default = col_double(), 
+                                     series_name = col_character(), 
+                                     episode = col_character(), 
+                                     url = col_character(),
+                                     season = col_character())) %>% filter(series_name %in% c("13 Reasons Why", "Black Mirror"))
+
+series <- dados %>% group_by(series_name) %>%
+  summarise(n = n()) 
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+dados.13reasons <- dados %>% filter(series_name == '13 Reasons Why')
+dados.blackmirror <- dados %>% filter(series_name == 'Black Mirror')
+
+plot_ly(data=dados, x=~series_ep, y=~user_rating,
+        color=~series_name, colors = c("darkgoldenrod1", "darkblue"),
+        text = ~paste("\nSérie: ", series_name, "\nEpisódio: ", series_ep, "\nAvaliação: ", user_rating, "\nNº votos: ", user_votes)) %>%
+   
+add_trace(size=~log(user_votes/sqrt(user_votes)), color=~series_name, alpha=0.9, visible="legendonly", type = 'scatter', mode = 'markers') %>%
+
+add_lines(data=dados.13reasons, x = ~series_ep, y=~fitted((loess(user_rating ~ as.numeric(series_ep))))) %>%
+add_lines(data=dados.blackmirror, x = ~series_ep, y=~fitted((loess(user_rating ~ as.numeric(series_ep))))) %>%
+
+layout(title="Notas gerais de episódios ao longo da série", 
+       yaxis = list(title="Avaliação geral do episódio"),
+       xaxis = list(title="Número do episódio na série"))
+```
+
+Nesta visualização podemos ver 4 váriáveis: a série (cor), o episódio (eixo horizontal), a avaliação do episódio (eixo y) e a quantidade de votos do mesmo. Para ver a quantidade de votos basta passar o mouse sobre uma posição da linha, assim irá surgir um ponto com os valores das váriaveis citadas anteriormente.
+
+Ao clicar na legenda ao lado direito do gráfico podemos interagir com a visualização. Ao clicar em um dos pontos, serão desenhados pontos no gráfico em que seu tamanho representa o número de votos que o episódio recebeu e sua posição representa sua avaliação. Marcando o ponto roxo que representa a série *Black Mirror*, podemos ver que seus episódios são bastante populares, porém não possuem um desempenho constante (existem episódios bem avaliados e mal avaliados).
+
+É possível ver rapidamente que a linha para a série *13 Reasons Why* possui uma curva que vai subindo, ou seja, a seŕie teve um bom desempenho ao passar dos episódios, ganhando avaliações cada vez melhores. Isso explica o porquê de a série estar acima de *Black Mirror* que possui alguns episódios com mais votos e com melhores avaliações, porém o desempenho da série é muito instável e na avaliação geral que fiz ela ficou abaixo de *13 Reasons Why* por esse motivo.

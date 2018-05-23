@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.</copyright>
-    <lastBuildDate>Mon, 30 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://gabrielmla.github.io/portfolio/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Avaliação geral ao longo da série</title>
+      <link>https://gabrielmla.github.io/portfolio/post/lab2-cp1/</link>
+      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://gabrielmla.github.io/portfolio/post/lab2-cp1/</guid>
+      <description>Sobre os dados Esta análise foi realizada utilizando dados sobre avaliações de episódios de séries presentes no IMDB até julho de 2017, nesse relátorio se encontram análises para as séries Black Mirror, e 13 Reasons Why. Mais informações sobre esses dados podem ser encontradas neste repositório.
+ {&#34;x&#34;:{&#34;visdat&#34;:{&#34;47673cfea58b&#34;:[&#34;function () &#34;,&#34;plotlyVisDat&#34;],&#34;476750aea6fc&#34;:[&#34;function () &#34;,&#34;data&#34;],&#34;476773dbb57b&#34;:[&#34;function () &#34;,&#34;data&#34;]},&#34;cur_data&#34;:&#34;476773dbb57b&#34;,&#34;attrs&#34;:{&#34;47673cfea58b&#34;:{&#34;x&#34;:{},&#34;y&#34;:{},&#34;text&#34;:{},&#34;color&#34;:{},&#34;colors&#34;:[&#34;darkgoldenrod1&#34;,&#34;darkblue&#34;],&#34;alpha&#34;:0.9,&#34;sizes&#34;:[10,100],&#34;size&#34;:{},&#34;visible&#34;:&#34;legendonly&#34;,&#34;type&#34;:&#34;scatter&#34;,&#34;mode&#34;:&#34;markers&#34;},&#34;476750aea6fc&#34;:{&#34;x&#34;:{},&#34;y&#34;:{},&#34;text&#34;:{},&#34;color&#34;:{},&#34;colors&#34;:[&#34;darkgoldenrod1&#34;,&#34;darkblue&#34;],&#34;alpha&#34;:1,&#34;sizes&#34;:[10,100],&#34;type&#34;:&#34;scatter&#34;,&#34;mode&#34;:&#34;lines&#34;},&#34;476773dbb57b&#34;:{&#34;x&#34;:{},&#34;y&#34;:{},&#34;text&#34;:{},&#34;color&#34;:{},&#34;colors&#34;:[&#34;darkgoldenrod1&#34;,&#34;darkblue&#34;],&#34;alpha&#34;:1,&#34;sizes&#34;:[10,100],&#34;type&#34;:&#34;scatter&#34;,&#34;mode&#34;:&#34;lines&#34;}},&#34;layout&#34;:{&#34;margin&#34;:{&#34;b&#34;:40,&#34;l&#34;:60,&#34;t&#34;:25,&#34;r&#34;:10},&#34;title&#34;:&#34;Notas gerais de episódios ao longo da série&#34;,&#34;yaxis&#34;:{&#34;domain&#34;:[0,1],&#34;title&#34;:&#34;Avaliação geral do episódio&#34;},&#34;xaxis&#34;:{&#34;domain&#34;:[0,1],&#34;title&#34;:&#34;Número do episódio na série&#34;</description>
+    </item>
     
     <item>
       <title>Lab 1 - Checkpoint 2 - Minhas perguntas</title>
