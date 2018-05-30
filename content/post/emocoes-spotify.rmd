@@ -1,0 +1,189 @@
+---
+title: "Emoções - Spotify"
+author: "Gabriel Morais Lúcio de Araújo"
+date: "2018-05-24"
+slug: lab2-cp1-rmd
+categories: ["R"]
+tags: ["R Markdown", "plot"]
+---
+<style type="text/css"> body { font-family: "Roboto", sans-serif; } body, td { font-size: 14px; } h1, h2, h3 { font-weight: bold; } code.r{ font-size: 11px; } </style>
+
+```{r message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment=NA, fig.width=8, fig.align='center', fig.env='marginfigure')
+library(tidyverse)
+library(here)
+library(gridExtra)
+library(plotly)
+theme_set(theme_minimal())
+```
+
+Esta análise, realizada no contexto da disciplina de Análise de Dados 1 (Ciências da Computação | UFCG), é um estudo sobre caractéristicas técnicas sobre músicas dos meus três artistas mais ouvidos de acordo com o meu perfil do [lastFm](https://www.last.fm/pt/user/gabrielmla) atualmente, sendo eles **Frank Ocean**, **Kendrick Lamar** e **Tame Impala**.
+
+### Sobre os dados
+Os dados foram obtidos a partir da API do Spotify (mais especificamente as audio_features das músicas de um artista presente na plataforma), utilizando do suporte do pacote `spotifyr` para fazer chamadas a API. Vamos então ver como funcionam os dados retornados pelo Spotify em uma pequena amostra:
+
+
+```{r message=FALSE}
+frank.ocean <- read_csv(here("content/dados/ad1/lab2/frankocean.csv"))
+kendrick.lamar <- read_csv(here("content/dados/ad1/lab2/kendrick_lamar.csv"))
+tame.impala <- read_csv(here("content/dados/ad1/lab2/tame_impala.csv"))
+top3.lastfm <- read_csv(here("content/dados/ad1/lab2/top3_last.csv"))
+```
+
+```{r}
+data.frank <- subset(frank.ocean, select = -c(album_uri, album_img, album_release_year, track_uri, album_popularity))
+head(data.frank, 5)
+```
+
+Omiti algumas variáveis para uma melhor visualização dos dados. Como podemos ver, temos muitos dados análiticos sobre as músicas, como `danceability` (o quão dancante a música é), `energy` (o quão energética a música é), entre vários outros. Durante as visualizações irei me aprofundar mais nas variáveis utilizadas, mas sinta-se livre para explorá-los nessa tabela.
+
+### Perguntas
+* Como são as emoções dos albúns dos artistas escolhidos?
+    + Existe correlação entre Loudness e Energy nas músicas?
+* Músicas com maior popularidade tendem a uma maior duração de partes cantadas ou maior duração de partes instrumentais?
+    + Músicas com maior popularidade tendem a ter um menor tempo de duração?
+
+### Como são as emoções dos artistas escolhidos?
+
+Antes de fazer as análises sobre as emoções/humor dos artistas escolhidos, primeiro vou definir emoção como sendo uma correlação entre a energia e a valência de uma música. Energia sendo a intensidade e atividade da música, e valência é a positividade da música.
+
+Antes de fazer a análise penso que o artista **Frank Ocean** terá uma valência e energia menor nas músicas, ele possui letras melancolicas e com um instrumental bem *chill* em boa parte de suas músicas. Em outro extremo acredito que **Kendrick Lamar** terá músicas com uma maior energia, mas talvez uma valência na mesma faixa, pois suas músicas sempre tentam trazer uma mensagem sobre o que realmente acontece com os negros nos Estados Unidos. Por último **Tame Impala**, não sei muito bem como será o desempenho dessa banda, suas músicas possuem uma boa parte instrumental e a valência as vezes nem sempre é alta. Enfim vamos para a análise agora.
+
+##### Top 3 Artistas
+
+```{r message=FALSE, warning=FALSE}
+contour.top3.s <- subplot(
+  plot_ly(x = top3.lastfm$valence, alpha = 0.6, type = 'histogram'), 
+  plotly_empty(), 
+  plot_ly(x = top3.lastfm$valence, y = top3.lastfm$energy, type = 'histogram2dcontour', showscale = F), 
+  plot_ly(y = top3.lastfm$energy, alpha = 0.6, type = 'histogram'),
+  nrows = 2, heights = c(0.2, 0.8), widths = c(0.8, 0.2), 
+  shareX = TRUE, shareY = TRUE, titleX = FALSE, titleY = FALSE
+)
+
+contour.top3.plot <- layout(contour.top3.s, showlegend = FALSE, title="Humor das músicas dos meus 3 artistas mais ouvidos",
+         xaxis=list(title="Valence"),
+         yaxis=list(title="Energy"))
+contour.top3.plot
+```
+
+Primeiramente fazendo uma análise geral dos 3 artistas. Temos aqui uma maior concentração de músicas com energia maior que *0.5* (observando o histograma vermelho que indica a energia), já para a valência temos uma distribuição mais normalizada (histograma azul). Observando o *Histograma Contour* vemos uma zona mais clara (quanto mais claro, maior a quantidade de músicas naquela região) na parte central da visualização, com uma pequena maior quantidade de músicas com valência < *0.5* do que com valência > *0.5*. No geral, analisando todas as músicas dos artistas temos que a maioria nem é muito *depressiva* nem muito *energética*.
+
+##### Frank Ocean
+
+```{r}
+contour.frank.plot <- plot_ly(x = ~frank.ocean$valence, y = ~frank.ocean$energy) %>% 
+  add_trace(type='histogram2dcontour') %>%
+  layout(title="Humor das músicas de Frank Ocean",
+         xaxis=list(title="Valence"),
+         yaxis=list(title="Energy"))
+contour.frank.plot
+```
+
+Como eu esperava de **Frank Ocean**, suas músicas possuem valência baixa, em geral, e energia também. Ainda temos uma certa quantidade de músicas que fogem isso (são mais energéticas e positivas), mas acredito que acertei na previsão de como seria essa visualização.
+
+##### Tame Impala
+
+```{r}
+contour.tame.plot <- plot_ly(x = ~tame.impala$valence, y = ~tame.impala$energy) %>% 
+  add_trace(type='histogram2dcontour') %>%
+    layout(title="Humor das músicas de Tame Impala",
+         xaxis=list(title="Valence"),
+         yaxis=list(title="Energy"))
+contour.tame.plot
+```
+
+Agora para **Tame Impala**. Eu preferi não realizar uma previsão de como seria essa visualização, mas esperava músicas mais energéticas, pois como disse elas possuem uma boa parte instrumental de rock psicodélico. Como podemos ver, praticamente todas as músicas da banda possuem uma energia > *0.6*, com uma maior concentração de músicas com energia > *0.8*. Mas a valência das músicas não chega a passar de *0.6*, apenas em alguns poucos casos.
+
+##### Kendrick Lamar
+
+```{r}
+contour.kendrick.plot <- plot_ly(x = ~kendrick.lamar$valence, y = ~kendrick.lamar$energy) %>% 
+  add_trace(type='histogram2dcontour') %>%
+    layout(title="Humor das músicas de Kendrick Lamar",
+         xaxis=list(title="Valence"),
+         yaxis=list(title="Energy"))
+contour.kendrick.plot
+```
+
+Para **Kendrick Lamar** notamos algo mais estranho, porém interessante. Ele possui duas regiões claras (com maior concentração de músicas), e elas possuem um comportamento diferente. Na primeira região clara (da esquerda pra direita) temos que as músicas com menor valência tendem a ser menos energéticas, com energia < *0.6* e valência < *0.5*. Na segunda região temos que músicas mais positivas (maior valência) tendem a ser mais energéticas, com energia > *0.7* e valência > *0.5*.
+
+#### Existe correlação entre Loudness(altura da música) e Energy(quão energética a música é)?
+
+Após ver o humor das músicas fiquei interessado em saber se quanto mais energética uma música, mais alta ela é. Para responder essa pergunta fiz o gráfico de correlação abaixo.
+
+```{r message=FALSE}
+corr.top3.loudener <- plot_ly(data = top3.lastfm, x = ~loudness, y = ~energy) %>%
+    add_trace(text = ~paste("Artist: ", artist, '<br>Music: ', track_name, '<br>Loudness: ', loudness, '<br>Energy: ', energy),
+              color = ~energy, 
+              size = ~loudness, 
+              mode = 'markers') %>%
+    layout(title="Correlação entre Loudness e Energy",
+           xaxis=list(title="Loudness"),
+           yaxis=list(title="Energy"))
+
+corr.top3.loudener
+```
+
+Confesso que fiquei um pouco surpreso com o resultado. Já tinha um pensamento que músicas mais energéticas fossem mais altas, porém não pensei que fosse uma correlação positiva tão nítida como a que podemos ver acima. É possível notar uma região como se fosse uma curva de uma parabóla subindo, quanto mais energética a música, mais alta ela tende a ser. Caso queira saber quais são as músicas baixa passar o mouse nos pontos para ver algumas informações sobre elas.
+
+### Músicas com maior popularidade tendem a uma maior duração de partes cantadas ou maior duração de partes instrumentais?
+
+Essa é uma pergunta que acredito que a sua resposta varie de acordo com o artista e estilo do mesmo. Existem gêneros musicais (como músicas eletrônicas) que as músicas mais populares são devido a um *drop* mais chiclete do que a letra da música ser interessante. Vamos ver o que acontece para os artistas que estou analisando.
+
+> Os gráficos de barra abaixo foram ordenados pela popularidade (barra azul).
+
+##### Frank Ocean
+
+```{r}
+frank.ocean.popular <- frank.ocean %>% arrange(desc(track_popularity))
+
+frank.ocean.popular.plot <- plot_ly(frank.ocean.popular, x = reorder(frank.ocean.popular$track_name, frank.ocean.popular$track_popularity), y = ~track_popularity, type = 'bar', name = 'Popularidade') %>%
+  add_trace(y = ~speechiness*100, name = 'Speechiness') %>%
+  layout(title = "Popularidade(azul) X Speechiness(laranja) em músicas", yaxis = list(title = 'Popularidade / Speechiness'), barmode = 'group', showlegend = FALSE)
+frank.ocean.popular.plot
+```
+
+##### Tame Impala
+
+```{r}
+tame.impala.popular <- tame.impala %>% arrange(desc(track_popularity))
+
+tame.impala.popular.plot <- plot_ly(tame.impala.popular, x = reorder(tame.impala.popular$track_name, tame.impala.popular$track_popularity), y = ~track_popularity, type = 'bar', name = 'Popularidade') %>%
+  add_trace(y = ~speechiness*100, name = 'Speechiness') %>%
+  layout(title = "Popularidade(azul) X Speechiness(laranja) em músicas", yaxis = list(title = 'Popularidade / Speechiness'), barmode = 'group', showlegend = FALSE)
+tame.impala.popular.plot
+```
+
+##### Kendrick Lamar
+
+```{r}
+kendrick.lamar.popular <- kendrick.lamar %>% arrange(desc(track_popularity))
+
+kendrick.lamar.popular.plot <- plot_ly(kendrick.lamar.popular, x = reorder(kendrick.lamar.popular$track_name, kendrick.lamar.popular$track_popularity), y = ~track_popularity, type = 'bar', name = 'Popularidade') %>%
+  add_trace(y = ~speechiness*100, name = 'Speechiness') %>%
+  layout(title = "Popularidade(azul) X Speechiness(laranja) em músicas", yaxis = list(title = 'Popularidade / Speechiness'), barmode = 'group', showlegend = FALSE)
+kendrick.lamar.popular.plot
+```
+
+Eu iria comentar o resultado de cada artista, porém os três apresentaram basicamente o mesmo resultado: Não existe uma correlação entre a popularide de uma música e a quantidade de partes cantadas (speechiness) para os meus três artistas mais ouvidos. Analisando os dados e relacionando com o que conheço das músicas, notei que eles nem sempre fazem sentido. Existem algumas músicas que são cantadas durante boa parte de sua duração que estão com speechiness baixo e outras que nem partes cantadas possuem (como *Start - Frank Ocean*) e estão com o speechiness alto. Apesar de alguns erros, acredito que não deva exister essa correlação ainda.
+
+#### Músicas com maior popularidade tendem a ter um menor tempo de duração?
+
+Acredito que músicas mais populares tenham uma menor duração, porém não tenho tanta certeza desse pensamento, vamos ver.
+
+```{r message=FALSE}
+top3.lastfm.popdur.plot <- plot_ly(data = top3.lastfm, x = ~track_popularity, y = ~duration_ms) %>%
+    add_trace(text = ~paste("Artist: ", artist, '<br>Music: ', track_name, '<br>Popularidade: ', track_popularity, '<br>Duração: ', duration_ms),
+              color = ~duration_ms,
+              size = ~track_popularity, 
+              mode = 'markers') %>%
+    layout(title="Popularidade X Duração(ms)",
+           xaxis=list(title="Popularidade"),
+           yaxis=list(title="Duração(ms)"))
+
+top3.lastfm.popdur.plot
+```
+
+Para a minha surpresa não existe uma correlação entre a popularidade de uma músicas e a sua duração para os artistas escolhidos. Temos uma certa *mancha* reta na visualização, em vez uma uma linha/curva positiva/negativa, indicando uma correlação entre as variáveis.
